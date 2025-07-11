@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rutinas Vocales</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>🎤 Rutinas Vocales</h1>
+  <div class="player">
+    <select id="trackSelect"></select>
+    <audio id="audioPlayer" controls></audio>
+    <div class="controls">
+      <label>Velocidad: <span id="speedLabel">1.0x</span></label>
+      <input type="range" id="speedSlider" min="0.5" max="1.5" step="0.1" value="1.0" />
+    </div>
+    <div class="note">Pitch ajustable próximamente 🔧</div>
+  </div>
+  <script src="main.js"></script>
+</body>
+</html>
