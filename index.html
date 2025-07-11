@@ -2,21 +2,50 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rutinas Vocales</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="main/style.css" />
+  <style>
+    body {
+      background-color: #121212;
+      color: white;
+      font-family: sans-serif;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: #1DB954;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-  <h1>🎤 Rutinas Vocales</h1>
-  <div class="player">
-    <select id="trackSelect"></select>
-    <audio id="audioPlayer" controls></audio>
-    <div class="controls">
-      <label>Velocidad: <span id="speedLabel">1.0x</span></label>
-      <input type="range" id="speedSlider" min="0.5" max="1.5" step="0.1" value="1.0" />
-    </div>
-    <div class="note">Pitch ajustable próximamente 🔧</div>
-  </div>
-  <script src="main.js"></script>
+  <h1>Rutinas Vocales</h1>
+  <p>Selecciona tu nombre para acceder a tus ejercicios personalizados:</p>
+  <ul>
+    <li><a href="alejandro/index.html">Alejandro</a></li>
+    <li><a href="juancarlos/index.html">Juan Carlos</a></li>
+    <li><a href="raimundo/index.html">Raimundo</a></li>
+    <!-- Agrega más alumnos aquí -->
+  </ul>
 </body>
 </html>
