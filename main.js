@@ -9,13 +9,6 @@ const messageElement = document.getElementById('customMessage');
 let currentTrackIndex = 0;
 let tracks = [];
 
-// Función para cargar una pista por su índice
-function loadTrack(index) {
-  audioPlayer.src = tracks[index].file;
-  audioPlayer.play();
-  trackSelect.value = tracks[index].file;
-}
-
 // Cargar la lista desde playlist.json
 fetch('playlist.json')
   .then(response => response.json())
@@ -74,4 +67,71 @@ if (rewindBtn && forwardBtn) {
   forwardBtn.addEventListener('click', () => {
     audioPlayer.currentTime = Math.min(audioPlayer.duration, audioPlayer.currentTime + 5);
   });
+}
+
+const noteInput = document.getElementById('noteInput');
+const saveNoteBtn = document.getElementById('saveNoteBtn');
+const notesList = document.getElementById('notesList');
+
+// Usaremos esta clave para guardar las notas, la separaremos por alumno y por ejercicio
+// Puedes usar una clave tipo: "rutinas_{alumno}_{ejercicio}"
+// Por simplicidad, usaremos "rutinas_alejandro_ejercicioX" donde X es currentTrackIndex + 1
+
+function getStorageKey() {
+  // Reemplaza 'alejandro' por el nombre de la carpeta/alumno si haces esto para varios alumnos
+  return `rutinas_alejandro_ejercicio${currentTrackIndex + 1}`;
+}
+
+function loadNotes() {
+  const key = getStorageKey();
+  const stored = localStorage.getItem(key);
+  if (!stored) {
+    notesList.innerHTML = '<li><i>No hay notas guardadas para este ejercicio.</i></li>';
+    return;
+  }
+  const notes = JSON.parse(stored);
+  notesList.innerHTML = '';
+  notes.forEach(note => {
+    const li = document.createElement('li');
+    li.style.marginBottom = '0.8rem';
+    li.style.borderBottom = '1px solid #ccc';
+    li.style.paddingBottom = '0.5rem';
+    li.innerHTML = `<strong>${note.date}</strong>:<br>${note.text}`;
+    notesList.appendChild(li);
+  });
+}
+
+function saveNote() {
+  const text = noteInput.value.trim();
+  if (text === '') {
+    alert('Por favor escribe algo antes de guardar.');
+    return;
+  }
+
+  const key = getStorageKey();
+  let notes = JSON.parse(localStorage.getItem(key)) || [];
+
+  const now = new Date();
+  const dateString = now.toLocaleString();
+
+  notes.push({
+    date: dateString,
+    text: text
+  });
+
+  localStorage.setItem(key, JSON.stringify(notes));
+  noteInput.value = '';
+  loadNotes();
+}
+
+// Evento para guardar la nota
+saveNoteBtn.addEventListener('click', saveNote);
+
+// Cada vez que se carga una pista, también cargamos las notas asociadas
+function loadTrack(index) {
+  audioPlayer.src = tracks[index].file;
+  audioPlayer.play();
+  trackSelect.value = tracks[index].file;
+
+  loadNotes(); // ← carga notas al cambiar de pista
 }
