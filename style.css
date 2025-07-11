@@ -1,34 +1,60 @@
 body {
+  background-color: #121212;
+  color: #FFFFFF;
   font-family: Arial, sans-serif;
-  background: #f2f2f2;
   text-align: center;
-  padding: 2rem;
-  color: #333;
+  padding: 40px;
 }
+
 h1 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+  color: #1DB954; /* Verde Spotify */
+  margin-bottom: 30px;
 }
-.player {
-  background: white;
-  border-radius: 10px;
-  padding: 2rem;
-  display: inline-block;
+
+label {
+  display: block;
+  margin: 20px 0 10px;
+  font-size: 1.2em;
 }
+
 select, input[type="range"] {
-  margin: 1rem 0;
-  padding: 0.5rem;
-  font-size: 1rem;
+  width: 80%;
+  max-width: 400px;
+  padding: 12px;
+  margin-bottom: 20px;
+  background-color: #282828;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
 }
+
 audio {
   width: 100%;
-  margin: 1rem 0;
+  max-width: 500px;
+  margin: 30px auto;
+  display: block;
+  filter: brightness(1.2);
 }
-.controls {
-  margin-top: 1rem;
+
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 8px;
+  border-radius: 4px;
+  background: #404040;
 }
-.note {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  color: #666;
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 24px;
+  width: 24px;
+  background: #1DB954;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#speedLabel {
+  font-size: 1.2em;
+  color: #1DB954;
+  margin-top: 8px;
 }
