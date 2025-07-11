@@ -55,14 +55,3 @@ audioPlayer.addEventListener('ended', () => {
     loadTrack(currentTrackIndex);
   }
 });
-
-// Cargar mensaje personalizado desde config.json
-fetch('config.json')
-  .then(response => response.json())
-  .then(config => {
-    const messageElement = document.getElementById('customMessage');
-    if (messageElement && config.message) {
-      messageElement.innerHTML = config.message;
-    }
-  });
-

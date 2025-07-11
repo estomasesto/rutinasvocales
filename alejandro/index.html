@@ -4,28 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rutinas Vocales - Alejandro</title>
-  <link rel="stylesheet" href="/main/style.css" />
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
   <div class="player-container">
     <h1>Rutina Vocal de Alejandro</h1>
-
-    <p id="customMessage" style="margin-bottom: 1rem; font-size: 1.1rem;"></p>
-
     <select id="trackSelect"></select>
     <audio id="audioPlayer" controls controlsList="nodownload"></audio>
-
-    <div class="skip-controls">
-      <button id="rewindBtn">⏪ -5s</button>
-      <button id="forwardBtn">+5s ⏩</button>
-    </div>
-
     <div class="controls">
       <label for="speedSlider">Velocidad:</label>
       <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1" />
       <span id="speedLabel">1.0x</span>
     </div>
   </div>
-  <script src="/main/main.js"></script>
+  <script src="../main.js"></script>
 </body>
 </html>
