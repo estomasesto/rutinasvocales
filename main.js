@@ -55,3 +55,17 @@ audioPlayer.addEventListener('ended', () => {
     loadTrack(currentTrackIndex);
   }
 });
+
+// Avanzar y retroceder 5 segundos
+const rewindBtn = document.getElementById('rewindBtn');
+const forwardBtn = document.getElementById('forwardBtn');
+
+if (rewindBtn && forwardBtn) {
+  rewindBtn.addEventListener('click', () => {
+    audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 5);
+  });
+
+  forwardBtn.addEventListener('click', () => {
+    audioPlayer.currentTime = Math.min(audioPlayer.duration, audioPlayer.currentTime + 5);
+  });
+}
