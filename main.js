@@ -2,6 +2,9 @@ const audioPlayer = document.getElementById('audioPlayer');
 const trackSelect = document.getElementById('trackSelect');
 const speedSlider = document.getElementById('speedSlider');
 const speedLabel = document.getElementById('speedLabel');
+const rewindBtn = document.getElementById('rewindBtn');
+const forwardBtn = document.getElementById('forwardBtn');
+const messageElement = document.getElementById('customMessage');
 
 let currentTrackIndex = 0;
 let tracks = [];
@@ -17,7 +20,13 @@ function loadTrack(index) {
 fetch('playlist.json')
   .then(response => response.json())
   .then(data => {
-    tracks = data;
+    // Si el JSON tiene mensaje y el elemento existe, lo mostramos
+    if (data.message && messageElement) {
+      messageElement.textContent = data.message;
+    }
+
+    // Soporte tanto para array como para objeto con 'tracks'
+    tracks = Array.isArray(data) ? data : data.tracks;
 
     tracks.forEach((track) => {
       const option = document.createElement('option');
@@ -57,9 +66,6 @@ audioPlayer.addEventListener('ended', () => {
 });
 
 // Avanzar y retroceder 5 segundos
-const rewindBtn = document.getElementById('rewindBtn');
-const forwardBtn = document.getElementById('forwardBtn');
-
 if (rewindBtn && forwardBtn) {
   rewindBtn.addEventListener('click', () => {
     audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 5);
