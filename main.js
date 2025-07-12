@@ -7,7 +7,7 @@ const forwardBtn = document.getElementById('forwardBtn');
 const messageElement = document.getElementById('customMessage');
 const resetSpeedBtn = document.getElementById('resetSpeedBtn');
 const clearNotesBtn = document.getElementById('clearNotesBtn');
-const resetSpeedBtn = document.getElementById('resetSpeedBtn');
+
 
 let currentTrackIndex = 0;
 let tracks = [];
@@ -157,9 +157,3 @@ function loadTrack(index) {
 
   loadNotes(); // ← carga notas al cambiar de pista
 }
-
-resetSpeedBtn.addEventListener('click', () => {
-  speedSlider.value = 1.0;
-  speedLabel.textContent = '1.0x';
-  audioPlayer.playbackRate = 1.0;
-});
