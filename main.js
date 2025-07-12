@@ -229,10 +229,12 @@ if (isIOS()) {
 	  
 	  // INSERTA AQUÍ ESTA PARTE:
       playback.onloadedmetadata = () => {
-        console.log('Duración grabación: ', playback.duration.toFixed(2), 'segundos');
-        // Si tienes un span o div para mostrarlo visualmente:
-        // document.getElementById('durationDisplay').textContent = playback.duration.toFixed(2) + ' s';
+	    const duracionTexto = document.getElementById('duracion');
+	    const segundos = Math.floor(playback.duration % 60).toString().padStart(2, '0');
+	    const minutos = Math.floor(playback.duration / 60);
+	    duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
 	  };
+
 	  // Obtener nombre del ejercicio actual
 	  const trackName = tracks[currentTrackIndex]?.name || 'Ejercicio';
 	  const now = new Date();
