@@ -5,6 +5,8 @@ const speedLabel = document.getElementById('speedLabel');
 const rewindBtn = document.getElementById('rewindBtn');
 const forwardBtn = document.getElementById('forwardBtn');
 const messageElement = document.getElementById('customMessage');
+const resetSpeedBtn = document.getElementById('resetSpeedBtn');
+
 
 let currentTrackIndex = 0;
 let tracks = [];
@@ -50,6 +52,13 @@ speedSlider.addEventListener('input', () => {
   const speed = parseFloat(speedSlider.value);
   speedLabel.textContent = speed.toFixed(1) + "x";
   audioPlayer.playbackRate = speed;
+});
+
+// Reiniciar la velocidad a 1.0x
+resetSpeedBtn.addEventListener('click', () => {
+  audioPlayer.playbackRate = 1;
+  speedSlider.value = 1;
+  speedLabel.textContent = "1.0x";
 });
 
 // Reproducir siguiente automáticamente cuando termina
