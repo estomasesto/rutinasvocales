@@ -210,6 +210,12 @@ if (isIOS()) {
       const blob = new Blob(audioChunks, { type: 'audio/webm' });
       const audioUrl = URL.createObjectURL(blob);
       playback.src = audioUrl;
+	  
+	  // Mostrar botón de descarga
+      const downloadBtn = document.getElementById('downloadBtn');
+      downloadBtn.style.display = 'inline-block';
+      downloadBtn.href = audioUrl;
+      downloadBtn.download = `grabacion_${new Date().toISOString()}.webm`;
     };
 
     mediaRecorder.start();
