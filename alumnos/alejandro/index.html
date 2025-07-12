@@ -5,6 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rutinas Vocales - Alejandro</title>
   <link rel="stylesheet" href="../../style.css" />
+  <style>
+    details {
+      background: #2c2c2c;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    summary {
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+    summary::-webkit-details-marker {
+      display: none;
+    }
+    summary::before {
+      content: "▶️ ";
+      display: inline-block;
+      margin-right: 0.5rem;
+      transform: rotate(0deg);
+      transition: transform 0.2s ease;
+    }
+    details[open] summary::before {
+      content: "🔽 ";
+    }
+  </style>
 </head>
 <body>
   <div class="player-container">
@@ -23,31 +49,37 @@
       <label for="speedSlider">Velocidad:</label>
       <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1" />
       <span id="speedLabel">1.0x</span>
-	  <button id="resetSpeedBtn" title="Volver a velocidad normal">Resetear velocidad</button>
+      <button id="resetSpeedBtn" title="Volver a velocidad normal">Resetear velocidad</button>
     </div>
-	
-	<div id="recorder">
-      <h2>Graba tu práctica 🎤</h2>
-      <button id="startBtn">🎙️ Grabar</button>
-      <button id="stopBtn" disabled>⏹️ Detener</button>
-	  <a id="downloadBtn" style="display:none;">⬇️ Descargar grabación</a>
-      <audio id="playback" controls></audio>
-    </div>
+
+    <!-- Sección de grabación en un menú desplegable -->
+    <details>
+      <summary>🎤 Graba tu práctica</summary>
+      <div id="recorder" style="margin-top: 1rem;">
+        <button id="startBtn">🎙️ Grabar</button>
+        <button id="stopBtn" disabled>⏹️ Detener</button>
+        <a id="downloadBtn" style="display:none;">⬇️ Descargar grabación</a>
+        <audio id="playback" controls></audio>
+      </div>
+    </details>
 
     <!-- Mensaje para usuarios de iOS -->
     <p id="ios-warning" style="display: none; color: #FF7070; font-weight: bold;">
       ⚠️ La grabación de voz no está disponible en iPhone/iPad. Por favor usa un computador o navegador compatible como Chrome o Firefox.
     </p>
 
-    <div class="notes-section" style="margin-top: 2rem;">
-      <h2>Notas del ejercicio</h2>
-      <textarea id="noteInput" rows="4" cols="50" placeholder="Escribe aquí lo que sentiste al hacer el ejercicio..."></textarea><br />
-      <button id="saveNoteBtn">Guardar Nota</button>
-	  <button id="clearNotesBtn" style="margin-left:10px; background:#f44336; color:white;">Borrar Notas</button>
+    <!-- Sección de notas en otro menú desplegable -->
+    <details>
+      <summary>📝 Notas del ejercicio</summary>
+      <div class="notes-section" style="margin-top: 1rem;">
+        <textarea id="noteInput" rows="4" cols="50" placeholder="Escribe aquí lo que sentiste al hacer el ejercicio..."></textarea><br />
+        <button id="saveNoteBtn">Guardar Nota</button>
+        <button id="clearNotesBtn" style="margin-left:10px; background:#f44336; color:white;">Borrar Notas</button>
 
-      <h3>Notas guardadas</h3>
-      <ul id="notesList" style="list-style: none; padding-left: 0;"></ul>
-    </div>
+        <h3>Notas guardadas</h3>
+        <ul id="notesList" style="list-style: none; padding-left: 0;"></ul>
+      </div>
+    </details>
   </div>
 
   <script src="../../main.js"></script>
