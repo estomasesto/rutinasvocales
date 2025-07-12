@@ -132,7 +132,7 @@ saveNoteBtn.addEventListener('click', saveNote);
 // Cada vez que se carga una pista, también cargamos las notas asociadas
 function loadTrack(index) {
   audioPlayer.src = tracks[index].file;
-  messageElement.textContent = trackMessages[tracks[index].file] || '';
+  messageElement.textContent = trackMessages[tracks[index].file] || '¡Buena práctica! Recuerda usar el diafragma :)';
   audioPlayer.play();
   trackSelect.value = tracks[index].file;
 
