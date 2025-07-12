@@ -186,11 +186,17 @@ function isIOS() {
 
 // Oculta el grabador si es iOS
 if (isIOS()) {
-  document.getElementById('recorder').style.display = 'none';
-  document.getElementById('ios-warning').style.display = 'block';
-  document.getElementById('recordingSection').style.display = 'none';
+  // Muestra el mensaje dentro del grabador
+  const iosWarning = document.getElementById('ios-warning');
+  if (iosWarning) {
+    iosWarning.style.display = 'block';
+  }
+
+  // Desactiva botones para evitar confusión
+  if (startBtn) startBtn.disabled = true;
+  if (stopBtn) stopBtn.disabled = true;
 } else {
-  // Solo activa el grabador si NO es iOS
+  // Lógica de grabación solo si NO es iOS
   startBtn.addEventListener('click', async () => {
     const stream = await navigator.mediaDevices.getUserMedia({
       audio: {
@@ -211,8 +217,8 @@ if (isIOS()) {
       const blob = new Blob(audioChunks, { type: 'audio/webm' });
       const audioUrl = URL.createObjectURL(blob);
       playback.src = audioUrl;
-	  
-	  // Mostrar botón de descarga
+
+      // Mostrar botón de descarga
       const downloadBtn = document.getElementById('downloadBtn');
       downloadBtn.style.display = 'inline-block';
       downloadBtn.href = audioUrl;

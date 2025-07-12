@@ -56,17 +56,18 @@
     <details id="recordingSection">
       <summary>🎤 Graba tu práctica</summary>
       <div id="recorder" style="margin-top: 1rem;">
+	  
+	    <!-- Mensaje solo visible en iOS -->
+        <p id="ios-warning" style="color: #d88; font-size: 0.9rem; display: none;">
+          ⚠️ La grabación no está disponible en iPhone. Si quieres grabarte, te recomendamos usar un computador o dispositivo Android.
+        </p>
+		
         <button id="startBtn">🎙️ Grabar</button>
         <button id="stopBtn" disabled>⏹️ Detener</button>
         <a id="downloadBtn" style="display:none;">⬇️ Descargar grabación</a>
         <audio id="playback" controls></audio>
       </div>
     </details>
-
-    <!-- Mensaje para usuarios de iOS -->
-    <p id="ios-warning" style="color: red; display: none;">
-      ⚠️ La grabación de voz no está disponible en dispositivos iOS. Puedes usar esta función desde un computador o dispositivo Android compatible.
-    </p>
 
     <!-- Sección de notas en otro menú desplegable -->
     <details>
