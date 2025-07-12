@@ -108,3 +108,30 @@ input[type="range"]::-webkit-slider-thumb {
   resize: vertical;
   max-height: 200px;
 }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+#recordingIndicator {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+#recordingDot {
+  width: 12px;
+  height: 12px;
+  background-color: red;
+  border-radius: 50%;
+  animation: blink 1s infinite;
+}
+
+#recordingIndicator span {
+  font-weight: bold;
+  color: red;
+  font-size: 1.1em;
+}

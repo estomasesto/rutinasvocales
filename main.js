@@ -116,7 +116,7 @@ function loadNotes() {
 function saveNote() {
   const text = noteInput.value.trim();
   if (text === '') {
-    alert('Por favor escribe algo antes de guardar.');
+    alert('Recuerda escribir algo antes de guardar!');
     return;
   }
 
@@ -175,6 +175,8 @@ function loadTrack(index) {
 const startBtn = document.getElementById('startBtn');
 const stopBtn = document.getElementById('stopBtn');
 const playback = document.getElementById('playback');
+const recordingIndicator = document.getElementById('recordingIndicator');
+
 
 let mediaRecorder;
 let audioChunks = [];
@@ -198,7 +200,8 @@ if (isIOS()) {
 } else {
   // Lógica de grabación solo si NO es iOS
   startBtn.addEventListener('click', async () => {
-    const stream = await navigator.mediaDevices.getUserMedia({
+	  recordingIndicator.style.display = 'flex';
+	  const stream = await navigator.mediaDevices.getUserMedia({
       audio: {
         echoCancellation: false,
         noiseSuppression: false,
@@ -214,6 +217,7 @@ if (isIOS()) {
     };
 
     mediaRecorder.onstop = () => {
+	  recordingIndicator.style.display = 'none';
       const blob = new Blob(audioChunks, { type: 'audio/webm' });
       const audioUrl = URL.createObjectURL(blob);
       playback.src = audioUrl;
