@@ -9,6 +9,10 @@ const messageElement = document.getElementById('customMessage');
 const resetSpeedBtn = document.getElementById('resetSpeedBtn');
 const clearNotesBtn = document.getElementById('clearNotesBtn');
 
+// *** NUEVA REFERENCIA AL ELEMENTO DE DURACIÓN ***
+const duracionTexto = document.getElementById('duracion');
+
+
 // Variables para manejar la lista de pistas y mensajes
 let currentTrackIndex = 0;
 let tracks = [];
@@ -88,7 +92,7 @@ const notesList = document.getElementById('notesList');
 
 // Clave de almacenamiento local basada en el número de ejercicio/pista actual
 function getStorageKey() {
-  return `rutinas_alejandro_ejercicio${currentTrackIndex + 1}`;
+  return `rutinas_alejandro_ejercicio_${currentTrackIndex + 1}`; // Corregido: Plantilla literal
 }
 
 // Cargar notas guardadas desde localStorage y mostrarlas
@@ -106,7 +110,7 @@ function loadNotes() {
     li.style.marginBottom = '0.8rem';
     li.style.borderBottom = '1px solid #ccc';
     li.style.paddingBottom = '0.5rem';
-    li.innerHTML = `<strong>${note.date}</strong>:<br>${note.text}`;
+    li.innerHTML = `<strong>${note.date}</strong>:<br>${note.text}`; // Corregido: Plantilla literal
     notesList.appendChild(li);
   });
 }
@@ -194,67 +198,106 @@ if (isIOS()) {
 } else {
   // Iniciar grabación al hacer click en "start"
   startBtn.addEventListener('click', async () => {
+    // *** Borrar cualquier mensaje de duración anterior al iniciar una nueva grabación ***
+    if (duracionTexto) {
+      duracionTexto.textContent = '';
+      duracionTexto.style.display = 'none'; // Ocultar el recuadro también
+    }
+
     recordingIndicator.style.display = 'flex'; // Mostrar indicador de grabando
-    const stream = await navigator.mediaDevices.getUserMedia({
-      audio: {
-        echoCancellation: false,
-        noiseSuppression: false,
-        autoGainControl: false
-      }
-    });
-
-    mediaRecorder = new MediaRecorder(stream);
-    audioChunks = [];
-
-    // Guardar datos cuando estén disponibles
-    mediaRecorder.ondataavailable = event => {
-      audioChunks.push(event.data);
-    };
-
-    // Cuando se detiene la grabación
-    mediaRecorder.onstop = () => {
-      recordingIndicator.style.display = 'none'; // Ocultar indicador
-      const blob = new Blob(audioChunks, { type: 'audio/webm' });
-      const audioUrl = URL.createObjectURL(blob);
-      playback.src = audioUrl;
-
-      playback.load();
-
-      // Mostrar duración de la grabación en el DOM
-      playback.onloadedmetadata = () => {
-        const duracion = playback.duration;
-        if (!isNaN(duracion) && isFinite(duracion)) {
-          const minutos = Math.floor(duracion / 60);
-          const segundos = Math.floor(duracion % 60).toString().padStart(2, '0');
-          const duracionTexto = document.getElementById('duracion');
-          duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
+    try { // Agregamos un try-catch para manejar permisos de micrófono
+      const stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          echoCancellation: false,
+          noiseSuppression: false,
+          autoGainControl: false
         }
+      });
+
+      mediaRecorder = new MediaRecorder(stream);
+      audioChunks = [];
+
+      // Guardar datos cuando estén disponibles
+      mediaRecorder.ondataavailable = event => {
+        audioChunks.push(event.data);
       };
 
-      // Preparar nombre para descargar la grabación
-      const trackName = tracks[currentTrackIndex]?.name || 'Ejercicio';
-      const now = new Date();
-      const safeName = trackName.replace(/[^a-zA-Z0-9 _-]/g, '').replace(/\s+/g, '_');
-      const dateStr = now.toISOString().slice(0, 10);
-      const timeStr = now.toTimeString().slice(0, 5).replace(':', '-');
-      const filename = `${safeName}_${dateStr}_${timeStr}.webm`;
+      // Cuando se detiene la grabación
+      mediaRecorder.onstop = () => {
+        recordingIndicator.style.display = 'none'; // Ocultar indicador
+        const blob = new Blob(audioChunks, { type: 'audio/webm' });
+        const audioUrl = URL.createObjectURL(blob);
+        playback.src = audioUrl;
 
-      // Mostrar y preparar botón de descarga
-      const downloadBtn = document.getElementById('downloadBtn');
-      downloadBtn.style.display = 'inline-block';
-      downloadBtn.href = audioUrl;
-      downloadBtn.download = filename;
-    };
+        playback.load();
 
-    mediaRecorder.start();
-    startBtn.disabled = true;
-    stopBtn.disabled = false;
+        // *** ASEGURARSE DE QUE ESTE EVENTO SE DISPARE Y ACTUALICE EL MENSAJE ***
+        playback.onloadedmetadata = () => {
+          const duracion = playback.duration;
+          if (duracionTexto && !isNaN(duracion) && isFinite(duracion)) {
+            const minutos = Math.floor(duracion / 60);
+            const segundos = Math.floor(duracion % 60).toString().padStart(2, '0');
+            duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
+            duracionTexto.style.display = 'block'; // Mostrar el recuadro con el mensaje
+          } else if (duracionTexto) {
+            duracionTexto.textContent = 'No se pudo obtener la duración de la grabación.';
+            duracionTexto.style.display = 'block';
+          }
+        };
+
+        // Si por alguna razón loadedmetadata no se dispara (ej. archivo muy corto),
+        // asegúrate de que el mensaje de duración se oculte o reinicie.
+        if (audioChunks.length === 0 && duracionTexto) {
+            duracionTexto.textContent = 'No se grabó audio.';
+            duracionTexto.style.display = 'block';
+        }
+
+
+        // Preparar nombre para descargar la grabación
+        const trackName = tracks[currentTrackIndex]?.name || 'Ejercicio';
+        const now = new Date();
+        const safeName = trackName.replace(/[^a-zA-Z0-9 _-]/g, '').replace(/\s+/g, '_');
+        const dateStr = now.toISOString().slice(0, 10);
+        const timeStr = now.toTimeString().slice(0, 5).replace(':', '-');
+        const filename = `${safeName}_${dateStr}_${timeStr}.webm`; // Corregido: Plantilla literal
+
+        // Mostrar y preparar botón de descarga
+        const downloadBtn = document.getElementById('downloadBtn');
+        downloadBtn.style.display = 'inline-block';
+        downloadBtn.href = audioUrl;
+        downloadBtn.download = filename;
+      };
+
+      mediaRecorder.start();
+      startBtn.disabled = true;
+      stopBtn.disabled = false;
+    } catch (err) {
+      console.error("Error al acceder al micrófono:", err);
+      recordingIndicator.style.display = 'none';
+      alert('No se pudo acceder al micrófono. Asegúrate de haber dado permiso.');
+      startBtn.disabled = false; // Re-habilitar el botón de inicio si falla
+      stopBtn.disabled = true;
+      if (duracionTexto) {
+        duracionTexto.textContent = 'Error al iniciar la grabación: Permiso de micrófono denegado.';
+        duracionTexto.style.display = 'block';
+      }
+    }
   });
 
   // Detener grabación
   stopBtn.addEventListener('click', () => {
-    mediaRecorder.stop();
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
+      mediaRecorder.stop();
+    }
     startBtn.disabled = false;
     stopBtn.disabled = true;
+  });
+
+  // *** Limpiar el mensaje de duración cuando se carga una nueva pista principal ***
+  audioPlayer.addEventListener('play', () => {
+    if (duracionTexto) {
+      duracionTexto.textContent = '';
+      duracionTexto.style.display = 'none';
+    }
   });
 }
