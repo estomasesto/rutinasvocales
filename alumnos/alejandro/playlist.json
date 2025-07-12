@@ -1,5 +1,9 @@
 {
-  "message": "Alejandro, enfócate en la apertura del paladar suave en los agudos.",
+  "messages": {
+    "../../audios/Rally_Melismático_III_EEE_AAA_OOO_(C_-_C).mp3": "Recuerda que puedes ralentizar el audio! La idea es que cada nota se diferencie de la otra :)",
+    "../../audios/Slide_To_A_Fifth_-_Pete_Faint_(C_-_D).mp3": "Concéntrate en deslizar sin perder apoyo.",
+    "../../audios/Up_An_Octave,_And_Down_The_Scale_-_Adaptado_(Bb_-_Bb).mp3": "Trabaja el descenso con claridad vocal."
+  },
   "tracks": [
     {
       "name": "Glissando a Quinta",
@@ -9,9 +13,9 @@
       "name": "Octava y para Abajo",
       "file": "../../audios/Up_An_Octave,_And_Down_The_Scale_-_Adaptado_(Bb_-_Bb).mp3"
     },
-	{
-	  "name": "Rally Melismático",
-	  "file": "../../audios/Rally_Melismático_III_EEE_AAA_OOO_(C_-_C).mp3"
-	}
+    {
+      "name": "Rally Melismático",
+      "file": "../../audios/Rally_Melismático_III_EEE_AAA_OOO_(C_-_C).mp3"
+    }
   ]
 }

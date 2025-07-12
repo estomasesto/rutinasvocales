@@ -13,10 +13,16 @@ let tracks = [];
 fetch('playlist.json')
   .then(response => response.json())
   .then(data => {
-    // Si el JSON tiene mensaje y el elemento existe, lo mostramos
-    if (data.message && messageElement) {
-      messageElement.textContent = data.message;
-    }
+    let trackMessages = {};
+if (data.messages) {
+  trackMessages = data.messages;
+}
+
+// Mostrar mensaje para la primera pista al cargar
+if (tracks.length > 0 && messageElement) {
+  const firstFile = tracks[0].file;
+  messageElement.textContent = trackMessages[firstFile] || '';
+}
 
     // Soporte tanto para array como para objeto con 'tracks'
     tracks = Array.isArray(data) ? data : data.tracks;
@@ -130,6 +136,7 @@ saveNoteBtn.addEventListener('click', saveNote);
 // Cada vez que se carga una pista, también cargamos las notas asociadas
 function loadTrack(index) {
   audioPlayer.src = tracks[index].file;
+  messageElement.textContent = trackMessages[tracks[index].file] || '';
   audioPlayer.play();
   trackSelect.value = tracks[index].file;
 
