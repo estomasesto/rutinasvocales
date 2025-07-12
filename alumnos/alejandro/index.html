@@ -71,15 +71,16 @@
     <!-- Sección de notas en otro menú desplegable -->
     <details>
       <summary>📝 Notas del ejercicio</summary>
-      <div class="notes-section" style="margin-top: 1rem;">
-        <textarea id="noteInput" rows="4" cols="50" placeholder="Escribe aquí lo que sentiste al hacer el ejercicio..."></textarea><br />
-        <button id="saveNoteBtn">Guardar Nota</button>
-        <button id="clearNotesBtn" style="margin-left:10px; background:#f44336; color:white;">Borrar Notas</button>
-
-        <h3>Notas guardadas</h3>
+      <div id="notesSection" style="background: #eee; padding: 1rem; border-radius: 1rem; margin-top: 1rem;">
+        <h3>📝 Notas del ejercicio</h3>
+        <textarea id="noteInput" rows="4" placeholder="Escribe tus observaciones aquí..." style="width: 100%; box-sizing: border-box; resize: vertical; max-height: 200px;"></textarea>
+        <br>
+        <button id="saveNoteBtn">💾 Guardar nota</button>
+        <button id="clearNotesBtn">🗑️ Borrar todas</button>
         <ul id="notesList" style="list-style: none; padding-left: 0;"></ul>
       </div>
     </details>
+
   </div>
 
   <script src="../../main.js"></script>

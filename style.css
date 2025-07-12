@@ -95,3 +95,16 @@ input[type="range"]::-webkit-slider-thumb {
 #downloadBtn:hover {
   background-color: #218838; /* verde más oscuro al pasar mouse */
 }
+
+#notesSection {
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#noteInput {
+  width: 100%;
+  box-sizing: border-box;
+  resize: vertical;
+  max-height: 200px;
+}
