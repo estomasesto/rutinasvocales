@@ -222,6 +222,9 @@ if (isIOS()) {
 	  const audioUrl = URL.createObjectURL(blob);
 	  playback.src = audioUrl;
 
+	  playback.load();            // <-- FORZAR RECARGA para actualizar duración y estado
+	  playback.currentTime = 0;   // <-- OPCIONAL: reinicia el tiempo para evitar confusión
+
 	  // Obtener nombre del ejercicio actual
 	  const trackName = tracks[currentTrackIndex]?.name || 'Ejercicio';
 	  const now = new Date();
@@ -242,6 +245,7 @@ if (isIOS()) {
 	  downloadBtn.href = audioUrl;
 	  downloadBtn.download = filename;
 	};
+
 
     mediaRecorder.start();
     startBtn.disabled = true;
