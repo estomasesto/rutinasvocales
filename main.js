@@ -224,7 +224,13 @@ if (isIOS()) {
 
 	  playback.load();            // <-- FORZAR RECARGA para actualizar duración y estado
 	  playback.currentTime = 0;   // <-- OPCIONAL: reinicia el tiempo para evitar confusión
-
+	  
+	  // INSERTA AQUÍ ESTA PARTE:
+      playback.onloadedmetadata = () => {
+        console.log('Duración grabación: ', playback.duration.toFixed(2), 'segundos');
+        // Si tienes un span o div para mostrarlo visualmente:
+        // document.getElementById('durationDisplay').textContent = playback.duration.toFixed(2) + ' s';
+	  };
 	  // Obtener nombre del ejercicio actual
 	  const trackName = tracks[currentTrackIndex]?.name || 'Ejercicio';
 	  const now = new Date();
