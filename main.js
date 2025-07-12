@@ -6,6 +6,7 @@ const rewindBtn = document.getElementById('rewindBtn');
 const forwardBtn = document.getElementById('forwardBtn');
 const messageElement = document.getElementById('customMessage');
 const resetSpeedBtn = document.getElementById('resetSpeedBtn');
+const clearNotesBtn = document.getElementById('clearNotesBtn');
 
 
 let currentTrackIndex = 0;
@@ -137,6 +138,15 @@ function saveNote() {
 
 // Evento para guardar la nota
 saveNoteBtn.addEventListener('click', saveNote);
+
+// Evento para borrar todas las notas (fuera de saveNote)
+clearNotesBtn.addEventListener('click', () => {
+  const key = getStorageKey();
+  if (confirm("¿Estás seguro de que quieres borrar todas las notas de este ejercicio?")) {
+    localStorage.removeItem(key);
+    loadNotes();
+  }
+});
 
 // Cada vez que se carga una pista, también cargamos las notas asociadas
 function loadTrack(index) {
