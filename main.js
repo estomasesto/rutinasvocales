@@ -188,6 +188,7 @@ function isIOS() {
 if (isIOS()) {
   document.getElementById('recorder').style.display = 'none';
   document.getElementById('ios-warning').style.display = 'block';
+  document.getElementById('recordingSection').style.display = 'none';
 } else {
   // Solo activa el grabador si NO es iOS
   startBtn.addEventListener('click', async () => {
