@@ -218,16 +218,30 @@ if (isIOS()) {
 
     mediaRecorder.onstop = () => {
 	  recordingIndicator.style.display = 'none';
-      const blob = new Blob(audioChunks, { type: 'audio/webm' });
-      const audioUrl = URL.createObjectURL(blob);
-      playback.src = audioUrl;
+	  const blob = new Blob(audioChunks, { type: 'audio/webm' });
+	  const audioUrl = URL.createObjectURL(blob);
+	  playback.src = audioUrl;
 
-      // Mostrar botón de descarga
-      const downloadBtn = document.getElementById('downloadBtn');
-      downloadBtn.style.display = 'inline-block';
-      downloadBtn.href = audioUrl;
-      downloadBtn.download = `grabacion_${new Date().toISOString()}.webm`;
-    };
+	  // Obtener nombre del ejercicio actual
+	  const trackName = tracks[currentTrackIndex]?.name || 'Ejercicio';
+	  const now = new Date();
+
+	  // Sanitizar nombre
+	  const safeName = trackName.replace(/[^a-zA-Z0-9 _-]/g, '').replace(/\s+/g, '_');
+
+	  // Crear timestamp seguro
+	  const dateStr = now.toISOString().slice(0, 10); // YYYY-MM-DD
+	  const timeStr = now.toTimeString().slice(0, 5).replace(':', '-'); // HH-MM
+
+	  // Nombre final del archivo
+	  const filename = `${safeName}_${dateStr}_${timeStr}.webm`;
+
+	  // Mostrar botón de descarga
+	  const downloadBtn = document.getElementById('downloadBtn');
+	  downloadBtn.style.display = 'inline-block';
+	  downloadBtn.href = audioUrl;
+	  downloadBtn.download = filename;
+	};
 
     mediaRecorder.start();
     startBtn.disabled = true;
