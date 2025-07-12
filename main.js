@@ -8,6 +8,7 @@ const messageElement = document.getElementById('customMessage');
 const resetSpeedBtn = document.getElementById('resetSpeedBtn');
 const clearNotesBtn = document.getElementById('clearNotesBtn');
 
+
 let currentTrackIndex = 0;
 let tracks = [];
 let trackMessages = {};
@@ -16,11 +17,13 @@ let trackMessages = {};
 fetch('playlist.json')
   .then(response => response.json())
   .then(data => {
+    // Soporte tanto para array como para objeto con 'tracks'
     tracks = Array.isArray(data) ? data : data.tracks;
     if (data.messages) {
       trackMessages = data.messages;
     }
 
+    // Llenar el selector
     tracks.forEach((track) => {
       const option = document.createElement('option');
       option.textContent = track.name;
@@ -28,12 +31,15 @@ fetch('playlist.json')
       trackSelect.appendChild(option);
     });
 
+    // Mostrar mensaje y reproducir la primera pista
     if (tracks.length > 0) {
       currentTrackIndex = 0;
       loadTrack(currentTrackIndex);
     }
   });
 
+
+// Cambiar de pista manualmente
 trackSelect.addEventListener('change', () => {
   const selectedIndex = tracks.findIndex(t => t.file === trackSelect.value);
   if (selectedIndex !== -1) {
@@ -42,18 +48,21 @@ trackSelect.addEventListener('change', () => {
   }
 });
 
+// Cambiar velocidad
 speedSlider.addEventListener('input', () => {
   const speed = parseFloat(speedSlider.value);
   speedLabel.textContent = speed.toFixed(1) + "x";
   audioPlayer.playbackRate = speed;
 });
 
+// Reiniciar la velocidad a 1.0x
 resetSpeedBtn.addEventListener('click', () => {
   audioPlayer.playbackRate = 1;
   speedSlider.value = 1;
   speedLabel.textContent = "1.0x";
 });
 
+// Reproducir siguiente automáticamente cuando termina
 audioPlayer.addEventListener('ended', () => {
   currentTrackIndex++;
   if (currentTrackIndex < tracks.length) {
@@ -61,6 +70,7 @@ audioPlayer.addEventListener('ended', () => {
   }
 });
 
+// Avanzar y retroceder 5 segundos
 if (rewindBtn && forwardBtn) {
   rewindBtn.addEventListener('click', () => {
     audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 5);
@@ -75,7 +85,12 @@ const noteInput = document.getElementById('noteInput');
 const saveNoteBtn = document.getElementById('saveNoteBtn');
 const notesList = document.getElementById('notesList');
 
+// Usaremos esta clave para guardar las notas, la separaremos por alumno y por ejercicio
+// Puedes usar una clave tipo: "rutinas_{alumno}_{ejercicio}"
+// Por simplicidad, usaremos "rutinas_alejandro_ejercicioX" donde X es currentTrackIndex + 1
+
 function getStorageKey() {
+  // Reemplaza 'alejandro' por el nombre de la carpeta/alumno si haces esto para varios alumnos
   return `rutinas_alejandro_ejercicio${currentTrackIndex + 1}`;
 }
 
@@ -121,8 +136,10 @@ function saveNote() {
   loadNotes();
 }
 
+// Evento para guardar la nota
 saveNoteBtn.addEventListener('click', saveNote);
 
+// Guardar nota también al presionar Enter en el input
 noteInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     e.preventDefault();
@@ -130,6 +147,7 @@ noteInput.addEventListener('keypress', (e) => {
   }
 });
 
+// Evento para borrar todas las notas (fuera de saveNote)
 clearNotesBtn.addEventListener('click', () => {
   const key = getStorageKey();
   if (confirm("¿Estás seguro de que quieres borrar todas las notas de este ejercicio?")) {
@@ -138,11 +156,13 @@ clearNotesBtn.addEventListener('click', () => {
   }
 });
 
+// Cada vez que se carga una pista, también cargamos las notas asociadas
 function loadTrack(index) {
   audioPlayer.src = tracks[index].file;
   messageElement.textContent = trackMessages[tracks[index].file] || '¡Buena práctica! Recuerda usar el diafragma :)';
   trackSelect.value = tracks[index].file;
-  loadNotes();
+
+  loadNotes(); // ← carga notas al cambiar de pista
 
   try {
     audioPlayer.play();
@@ -151,27 +171,37 @@ function loadTrack(index) {
   }
 }
 
+
 const startBtn = document.getElementById('startBtn');
 const stopBtn = document.getElementById('stopBtn');
 const playback = document.getElementById('playback');
 const recordingIndicator = document.getElementById('recordingIndicator');
 
+
 let mediaRecorder;
 let audioChunks = [];
 
+// Función para detectar iOS
 function isIOS() {
   return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 }
 
+// Oculta el grabador si es iOS
 if (isIOS()) {
+  // Muestra el mensaje dentro del grabador
   const iosWarning = document.getElementById('ios-warning');
-  if (iosWarning) iosWarning.style.display = 'block';
+  if (iosWarning) {
+    iosWarning.style.display = 'block';
+  }
+
+  // Desactiva botones para evitar confusión
   if (startBtn) startBtn.disabled = true;
   if (stopBtn) stopBtn.disabled = true;
 } else {
+  // Lógica de grabación solo si NO es iOS
   startBtn.addEventListener('click', async () => {
-    recordingIndicator.style.display = 'flex';
-    const stream = await navigator.mediaDevices.getUserMedia({
+	  recordingIndicator.style.display = 'flex';
+	  const stream = await navigator.mediaDevices.getUserMedia({
       audio: {
         echoCancellation: false,
         noiseSuppression: false,
@@ -187,36 +217,51 @@ if (isIOS()) {
     };
 
     mediaRecorder.onstop = () => {
-      recordingIndicator.style.display = 'none';
-      const blob = new Blob(audioChunks, { type: 'audio/webm' });
-      const audioUrl = URL.createObjectURL(blob);
-      playback.src = audioUrl;
+	  recordingIndicator.style.display = 'none';
+	  const blob = new Blob(audioChunks, { type: 'audio/webm' });
+	  const audioUrl = URL.createObjectURL(blob);
+	  playback.src = audioUrl;
 
-      playback.load();
-
-      // ← Aquí se muestra la duración
+	  playback.addEventListener('loadedmetadata', () => {
+	    playback.currentTime = 0;
+	  });
+	  playback.load();
+	  
+	  // INSERTA AQUÍ ESTA PARTE:
       playback.onloadedmetadata = () => {
-        const duracion = playback.duration;
-        if (!isNaN(duracion) && isFinite(duracion)) {
-          const minutos = Math.floor(duracion / 60);
-          const segundos = Math.floor(duracion % 60).toString().padStart(2, '0');
-          const duracionTexto = document.getElementById('duracion');
-          duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
-        }
-      };
+		  playback.addEventListener('durationchange', () => {
+			const duracion = playback.duration;
+			if (!isNaN(duracion) && isFinite(duracion)) {
+			  const minutos = Math.floor(duracion / 60);
+			  const segundos = Math.floor(duracion % 60).toString().padStart(2, '0');
 
-      const trackName = tracks[currentTrackIndex]?.name || 'Ejercicio';
-      const now = new Date();
-      const safeName = trackName.replace(/[^a-zA-Z0-9 _-]/g, '').replace(/\s+/g, '_');
-      const dateStr = now.toISOString().slice(0, 10);
-      const timeStr = now.toTimeString().slice(0, 5).replace(':', '-');
-      const filename = `${safeName}_${dateStr}_${timeStr}.webm`;
+			  const duracionTexto = document.getElementById('duracion');
+			  duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
+			}
+		  }, { once: true }); // Solo una vez
+		};
 
-      const downloadBtn = document.getElementById('downloadBtn');
-      downloadBtn.style.display = 'inline-block';
-      downloadBtn.href = audioUrl;
-      downloadBtn.download = filename;
-    };
+	  // Obtener nombre del ejercicio actual
+	  const trackName = tracks[currentTrackIndex]?.name || 'Ejercicio';
+	  const now = new Date();
+
+	  // Sanitizar nombre
+	  const safeName = trackName.replace(/[^a-zA-Z0-9 _-]/g, '').replace(/\s+/g, '_');
+
+	  // Crear timestamp seguro
+	  const dateStr = now.toISOString().slice(0, 10); // YYYY-MM-DD
+	  const timeStr = now.toTimeString().slice(0, 5).replace(':', '-'); // HH-MM
+
+	  // Nombre final del archivo
+	  const filename = `${safeName}_${dateStr}_${timeStr}.webm`;
+
+	  // Mostrar botón de descarga
+	  const downloadBtn = document.getElementById('downloadBtn');
+	  downloadBtn.style.display = 'inline-block';
+	  downloadBtn.href = audioUrl;
+	  downloadBtn.download = filename;
+	};
+
 
     mediaRecorder.start();
     startBtn.disabled = true;
