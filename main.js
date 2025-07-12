@@ -222,8 +222,10 @@ if (isIOS()) {
 	  const audioUrl = URL.createObjectURL(blob);
 	  playback.src = audioUrl;
 
-	  playback.load();            // <-- FORZAR RECARGA para actualizar duración y estado
-	  playback.currentTime = 0;   // <-- OPCIONAL: reinicia el tiempo para evitar confusión
+	  playback.addEventListener('loadedmetadata', () => {
+	    playback.currentTime = 0;
+	  });
+	  playback.load();
 	  
 	  // INSERTA AQUÍ ESTA PARTE:
       playback.onloadedmetadata = () => {
