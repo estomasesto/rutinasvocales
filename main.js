@@ -167,7 +167,13 @@ const stopBtn = document.getElementById('stopBtn');
 const playback = document.getElementById('playback');
 
 startBtn.addEventListener('click', async () => {
-  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  const stream = await navigator.mediaDevices.getUserMedia({
+  audio: {
+    echoCancellation: false,
+    noiseSuppression: false,
+    autoGainControl: false
+  }
+});
   mediaRecorder = new MediaRecorder(stream);
 
   audioChunks = [];
