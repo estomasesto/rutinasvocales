@@ -229,11 +229,17 @@ if (isIOS()) {
 	  
 	  // INSERTA AQUÍ ESTA PARTE:
       playback.onloadedmetadata = () => {
-	    const duracionTexto = document.getElementById('duracion');
-	    const segundos = Math.floor(playback.duration % 60).toString().padStart(2, '0');
-	    const minutos = Math.floor(playback.duration / 60);
-	    duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
-	  };
+		  playback.addEventListener('durationchange', () => {
+			const duracion = playback.duration;
+			if (!isNaN(duracion) && isFinite(duracion)) {
+			  const minutos = Math.floor(duracion / 60);
+			  const segundos = Math.floor(duracion % 60).toString().padStart(2, '0');
+
+			  const duracionTexto = document.getElementById('duracion');
+			  duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
+			}
+		  }, { once: true }); // Solo una vez
+		};
 
 	  // Obtener nombre del ejercicio actual
 	  const trackName = tracks[currentTrackIndex]?.name || 'Ejercicio';
