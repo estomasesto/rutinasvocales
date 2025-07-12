@@ -1,3 +1,4 @@
+// Referencias a elementos del DOM
 const audioPlayer = document.getElementById('audioPlayer');
 const trackSelect = document.getElementById('trackSelect');
 const speedSlider = document.getElementById('speedSlider');
@@ -8,22 +9,22 @@ const messageElement = document.getElementById('customMessage');
 const resetSpeedBtn = document.getElementById('resetSpeedBtn');
 const clearNotesBtn = document.getElementById('clearNotesBtn');
 
-
+// Variables para manejar la lista de pistas y mensajes
 let currentTrackIndex = 0;
 let tracks = [];
 let trackMessages = {};
 
-// Cargar la lista desde playlist.json
+// Carga la lista de pistas desde 'playlist.json'
 fetch('playlist.json')
   .then(response => response.json())
   .then(data => {
-    // Soporte tanto para array como para objeto con 'tracks'
+    // El archivo puede tener un array o un objeto con 'tracks' y 'messages'
     tracks = Array.isArray(data) ? data : data.tracks;
     if (data.messages) {
       trackMessages = data.messages;
     }
 
-    // Llenar el selector
+    // Llena el <select> con las opciones de pistas
     tracks.forEach((track) => {
       const option = document.createElement('option');
       option.textContent = track.name;
@@ -31,15 +32,14 @@ fetch('playlist.json')
       trackSelect.appendChild(option);
     });
 
-    // Mostrar mensaje y reproducir la primera pista
+    // Carga la primera pista automáticamente
     if (tracks.length > 0) {
       currentTrackIndex = 0;
       loadTrack(currentTrackIndex);
     }
   });
 
-
-// Cambiar de pista manualmente
+// Cambiar pista cuando se selecciona otra del <select>
 trackSelect.addEventListener('change', () => {
   const selectedIndex = tracks.findIndex(t => t.file === trackSelect.value);
   if (selectedIndex !== -1) {
@@ -48,21 +48,21 @@ trackSelect.addEventListener('change', () => {
   }
 });
 
-// Cambiar velocidad
+// Cambiar la velocidad de reproducción con el slider
 speedSlider.addEventListener('input', () => {
   const speed = parseFloat(speedSlider.value);
   speedLabel.textContent = speed.toFixed(1) + "x";
   audioPlayer.playbackRate = speed;
 });
 
-// Reiniciar la velocidad a 1.0x
+// Botón para resetear la velocidad a 1x
 resetSpeedBtn.addEventListener('click', () => {
   audioPlayer.playbackRate = 1;
   speedSlider.value = 1;
   speedLabel.textContent = "1.0x";
 });
 
-// Reproducir siguiente automáticamente cuando termina
+// Al terminar una pista, reproducir la siguiente automáticamente si existe
 audioPlayer.addEventListener('ended', () => {
   currentTrackIndex++;
   if (currentTrackIndex < tracks.length) {
@@ -70,7 +70,7 @@ audioPlayer.addEventListener('ended', () => {
   }
 });
 
-// Avanzar y retroceder 5 segundos
+// Botones para avanzar o retroceder 5 segundos en la pista actual
 if (rewindBtn && forwardBtn) {
   rewindBtn.addEventListener('click', () => {
     audioPlayer.currentTime = Math.max(0, audioPlayer.currentTime - 5);
@@ -81,19 +81,17 @@ if (rewindBtn && forwardBtn) {
   });
 }
 
+// Elementos para notas
 const noteInput = document.getElementById('noteInput');
 const saveNoteBtn = document.getElementById('saveNoteBtn');
 const notesList = document.getElementById('notesList');
 
-// Usaremos esta clave para guardar las notas, la separaremos por alumno y por ejercicio
-// Puedes usar una clave tipo: "rutinas_{alumno}_{ejercicio}"
-// Por simplicidad, usaremos "rutinas_alejandro_ejercicioX" donde X es currentTrackIndex + 1
-
+// Clave de almacenamiento local basada en el número de ejercicio/pista actual
 function getStorageKey() {
-  // Reemplaza 'alejandro' por el nombre de la carpeta/alumno si haces esto para varios alumnos
   return `rutinas_alejandro_ejercicio${currentTrackIndex + 1}`;
 }
 
+// Cargar notas guardadas desde localStorage y mostrarlas
 function loadNotes() {
   const key = getStorageKey();
   const stored = localStorage.getItem(key);
@@ -113,6 +111,7 @@ function loadNotes() {
   });
 }
 
+// Guardar una nota nueva en localStorage
 function saveNote() {
   const text = noteInput.value.trim();
   if (text === '') {
@@ -136,10 +135,10 @@ function saveNote() {
   loadNotes();
 }
 
-// Evento para guardar la nota
+// Listener para el botón de guardar nota
 saveNoteBtn.addEventListener('click', saveNote);
 
-// Guardar nota también al presionar Enter en el input
+// Permitir guardar nota presionando Enter
 noteInput.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     e.preventDefault();
@@ -147,7 +146,7 @@ noteInput.addEventListener('keypress', (e) => {
   }
 });
 
-// Evento para borrar todas las notas (fuera de saveNote)
+// Botón para borrar todas las notas del ejercicio actual
 clearNotesBtn.addEventListener('click', () => {
   const key = getStorageKey();
   if (confirm("¿Estás seguro de que quieres borrar todas las notas de este ejercicio?")) {
@@ -156,14 +155,15 @@ clearNotesBtn.addEventListener('click', () => {
   }
 });
 
-// Cada vez que se carga una pista, también cargamos las notas asociadas
+// Función para cargar una pista en el reproductor
 function loadTrack(index) {
   audioPlayer.src = tracks[index].file;
+  // Mostrar mensaje personalizado o uno por defecto
   messageElement.textContent = trackMessages[tracks[index].file] || '¡Buena práctica! Recuerda usar el diafragma :)';
   trackSelect.value = tracks[index].file;
+  loadNotes();
 
-  loadNotes(); // ← carga notas al cambiar de pista
-
+  // Intentar reproducir automáticamente
   try {
     audioPlayer.play();
   } catch (err) {
@@ -171,37 +171,31 @@ function loadTrack(index) {
   }
 }
 
-
+// Elementos para grabación
 const startBtn = document.getElementById('startBtn');
 const stopBtn = document.getElementById('stopBtn');
 const playback = document.getElementById('playback');
 const recordingIndicator = document.getElementById('recordingIndicator');
 
-
 let mediaRecorder;
 let audioChunks = [];
 
-// Función para detectar iOS
+// Detectar iOS para deshabilitar grabación (por problemas conocidos)
 function isIOS() {
   return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 }
 
-// Oculta el grabador si es iOS
 if (isIOS()) {
-  // Muestra el mensaje dentro del grabador
+  // Mostrar advertencia y deshabilitar botones de grabación en iOS
   const iosWarning = document.getElementById('ios-warning');
-  if (iosWarning) {
-    iosWarning.style.display = 'block';
-  }
-
-  // Desactiva botones para evitar confusión
+  if (iosWarning) iosWarning.style.display = 'block';
   if (startBtn) startBtn.disabled = true;
   if (stopBtn) stopBtn.disabled = true;
 } else {
-  // Lógica de grabación solo si NO es iOS
+  // Iniciar grabación al hacer click en "start"
   startBtn.addEventListener('click', async () => {
-	  recordingIndicator.style.display = 'flex';
-	  const stream = await navigator.mediaDevices.getUserMedia({
+    recordingIndicator.style.display = 'flex'; // Mostrar indicador de grabando
+    const stream = await navigator.mediaDevices.getUserMedia({
       audio: {
         echoCancellation: false,
         noiseSuppression: false,
@@ -212,62 +206,52 @@ if (isIOS()) {
     mediaRecorder = new MediaRecorder(stream);
     audioChunks = [];
 
+    // Guardar datos cuando estén disponibles
     mediaRecorder.ondataavailable = event => {
       audioChunks.push(event.data);
     };
 
+    // Cuando se detiene la grabación
     mediaRecorder.onstop = () => {
-	  recordingIndicator.style.display = 'none';
-	  const blob = new Blob(audioChunks, { type: 'audio/webm' });
-	  const audioUrl = URL.createObjectURL(blob);
-	  playback.src = audioUrl;
+      recordingIndicator.style.display = 'none'; // Ocultar indicador
+      const blob = new Blob(audioChunks, { type: 'audio/webm' });
+      const audioUrl = URL.createObjectURL(blob);
+      playback.src = audioUrl;
 
-	  playback.addEventListener('loadedmetadata', () => {
-	    playback.currentTime = 0;
-	  });
-	  playback.load();
-	  
-	  // INSERTA AQUÍ ESTA PARTE:
+      playback.load();
+
+      // Mostrar duración de la grabación en el DOM
       playback.onloadedmetadata = () => {
-		  playback.addEventListener('durationchange', () => {
-			const duracion = playback.duration;
-			if (!isNaN(duracion) && isFinite(duracion)) {
-			  const minutos = Math.floor(duracion / 60);
-			  const segundos = Math.floor(duracion % 60).toString().padStart(2, '0');
+        const duracion = playback.duration;
+        if (!isNaN(duracion) && isFinite(duracion)) {
+          const minutos = Math.floor(duracion / 60);
+          const segundos = Math.floor(duracion % 60).toString().padStart(2, '0');
+          const duracionTexto = document.getElementById('duracion');
+          duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
+        }
+      };
 
-			  const duracionTexto = document.getElementById('duracion');
-			  duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
-			}
-		  }, { once: true }); // Solo una vez
-		};
+      // Preparar nombre para descargar la grabación
+      const trackName = tracks[currentTrackIndex]?.name || 'Ejercicio';
+      const now = new Date();
+      const safeName = trackName.replace(/[^a-zA-Z0-9 _-]/g, '').replace(/\s+/g, '_');
+      const dateStr = now.toISOString().slice(0, 10);
+      const timeStr = now.toTimeString().slice(0, 5).replace(':', '-');
+      const filename = `${safeName}_${dateStr}_${timeStr}.webm`;
 
-	  // Obtener nombre del ejercicio actual
-	  const trackName = tracks[currentTrackIndex]?.name || 'Ejercicio';
-	  const now = new Date();
-
-	  // Sanitizar nombre
-	  const safeName = trackName.replace(/[^a-zA-Z0-9 _-]/g, '').replace(/\s+/g, '_');
-
-	  // Crear timestamp seguro
-	  const dateStr = now.toISOString().slice(0, 10); // YYYY-MM-DD
-	  const timeStr = now.toTimeString().slice(0, 5).replace(':', '-'); // HH-MM
-
-	  // Nombre final del archivo
-	  const filename = `${safeName}_${dateStr}_${timeStr}.webm`;
-
-	  // Mostrar botón de descarga
-	  const downloadBtn = document.getElementById('downloadBtn');
-	  downloadBtn.style.display = 'inline-block';
-	  downloadBtn.href = audioUrl;
-	  downloadBtn.download = filename;
-	};
-
+      // Mostrar y preparar botón de descarga
+      const downloadBtn = document.getElementById('downloadBtn');
+      downloadBtn.style.display = 'inline-block';
+      downloadBtn.href = audioUrl;
+      downloadBtn.download = filename;
+    };
 
     mediaRecorder.start();
     startBtn.disabled = true;
     stopBtn.disabled = false;
   });
 
+  // Detener grabación
   stopBtn.addEventListener('click', () => {
     mediaRecorder.stop();
     startBtn.disabled = false;
