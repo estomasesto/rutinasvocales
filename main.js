@@ -8,25 +8,19 @@ const messageElement = document.getElementById('customMessage');
 
 let currentTrackIndex = 0;
 let tracks = [];
+let trackMessages = {};
 
 // Cargar la lista desde playlist.json
 fetch('playlist.json')
   .then(response => response.json())
   .then(data => {
-    let trackMessages = {};
-if (data.messages) {
-  trackMessages = data.messages;
-}
-
-// Mostrar mensaje para la primera pista al cargar
-if (tracks.length > 0 && messageElement) {
-  const firstFile = tracks[0].file;
-  messageElement.textContent = trackMessages[firstFile] || '';
-}
-
     // Soporte tanto para array como para objeto con 'tracks'
     tracks = Array.isArray(data) ? data : data.tracks;
+    if (data.messages) {
+      trackMessages = data.messages;
+    }
 
+    // Llenar el selector
     tracks.forEach((track) => {
       const option = document.createElement('option');
       option.textContent = track.name;
@@ -34,11 +28,13 @@ if (tracks.length > 0 && messageElement) {
       trackSelect.appendChild(option);
     });
 
+    // Mostrar mensaje y reproducir la primera pista
     if (tracks.length > 0) {
       currentTrackIndex = 0;
       loadTrack(currentTrackIndex);
     }
   });
+
 
 // Cambiar de pista manualmente
 trackSelect.addEventListener('change', () => {
