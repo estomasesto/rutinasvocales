@@ -139,6 +139,14 @@ function saveNote() {
 // Evento para guardar la nota
 saveNoteBtn.addEventListener('click', saveNote);
 
+// Guardar nota también al presionar Enter en el input
+noteInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    saveNote();
+  }
+});
+
 // Evento para borrar todas las notas (fuera de saveNote)
 clearNotesBtn.addEventListener('click', () => {
   const key = getStorageKey();
@@ -152,49 +160,66 @@ clearNotesBtn.addEventListener('click', () => {
 function loadTrack(index) {
   audioPlayer.src = tracks[index].file;
   messageElement.textContent = trackMessages[tracks[index].file] || '¡Buena práctica! Recuerda usar el diafragma :)';
-  audioPlayer.play();
   trackSelect.value = tracks[index].file;
 
   loadNotes(); // ← carga notas al cambiar de pista
+
+  try {
+    audioPlayer.play();
+  } catch (err) {
+    console.warn("No se pudo reproducir automáticamente:", err);
+  }
 }
 
-
-let mediaRecorder;
-let audioChunks = [];
 
 const startBtn = document.getElementById('startBtn');
 const stopBtn = document.getElementById('stopBtn');
 const playback = document.getElementById('playback');
 
-startBtn.addEventListener('click', async () => {
-  const stream = await navigator.mediaDevices.getUserMedia({
-  audio: {
-    echoCancellation: false,
-    noiseSuppression: false,
-    autoGainControl: false
-  }
-});
-  mediaRecorder = new MediaRecorder(stream);
+let mediaRecorder;
+let audioChunks = [];
 
-  audioChunks = [];
+// Función para detectar iOS
+function isIOS() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+}
 
-  mediaRecorder.ondataavailable = event => {
-    audioChunks.push(event.data);
-  };
+// Oculta el grabador si es iOS
+if (isIOS()) {
+  document.getElementById('recorder').style.display = 'none';
+  document.getElementById('ios-warning').style.display = 'block';
+} else {
+  // Solo activa el grabador si NO es iOS
+  startBtn.addEventListener('click', async () => {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: {
+        echoCancellation: false,
+        noiseSuppression: false,
+        autoGainControl: false
+      }
+    });
 
-  mediaRecorder.onstop = () => {
-    const blob = new Blob(audioChunks, { type: 'audio/webm' });
-    const audioUrl = URL.createObjectURL(blob);
-    playback.src = audioUrl;
-  };
+    mediaRecorder = new MediaRecorder(stream);
+    audioChunks = [];
 
-  mediaRecorder.start();
-  startBtn.disabled = true;
-  stopBtn.disabled = false;
-});
+    mediaRecorder.ondataavailable = event => {
+      audioChunks.push(event.data);
+    };
 
-stopBtn.addEventListener('click', () => {
-  mediaRecorder.stop();
-  startBtn.disabled = false;
-  stopBtn.disabled = true;
-});
+    mediaRecorder.onstop = () => {
+      const blob = new Blob(audioChunks, { type: 'audio/webm' });
+      const audioUrl = URL.createObjectURL(blob);
+      playback.src = audioUrl;
+    };
+
+    mediaRecorder.start();
+    startBtn.disabled = true;
+    stopBtn.disabled = false;
+  });
+
+  stopBtn.addEventListener('click', () => {
+    mediaRecorder.stop();
+    startBtn.disabled = false;
+    stopBtn.disabled = true;
+  });
+}
