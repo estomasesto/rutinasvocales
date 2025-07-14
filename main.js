@@ -16,23 +16,18 @@ const duracionTexto = document.getElementById('duracion');
 // Variables para manejar la lista de pistas y mensajes
 let currentTrackIndex = 0;
 let tracks = [];
-let trackMessages = {};
 
 // Carga la lista de pistas desde 'playlist.json'
 fetch('playlist.json')
   .then(response => response.json())
   .then(data => {
-    // El archivo puede tener un array o un objeto con 'tracks' y 'messages'
-    tracks = Array.isArray(data) ? data : data.tracks;
-    if (data.messages) {
-      trackMessages = data.messages;
-    }
+    tracks = data; // ya es un array directamente
 
     // Llena el <select> con las opciones de pistas
     tracks.forEach((track) => {
       const option = document.createElement('option');
-      option.textContent = track.name;
-      option.value = track.file;
+      option.textContent = track.nombre;  // antes era track.name, ahora 'nombre'
+      option.value = track.archivo;        // antes era track.file, ahora 'archivo'
       trackSelect.appendChild(option);
     });
 
@@ -42,15 +37,38 @@ fetch('playlist.json')
       loadTrack(currentTrackIndex);
     }
   });
+  
+// Función para cargar una pista según índice
+function loadTrack(index) {
+  if (index < 0 || index >= tracks.length) return;
+
+  const track = tracks[index];
+  audioPlayer.src = `audios/${track.archivo}`;
+  audioPlayer.load();
+
+  messageElement.innerHTML = track.mensaje || '¡Buena práctica! Recuerda usar el diafragma :)';
+
+  trackSelect.value = track.archivo;
+
+  loadNotes();
+
+  try {
+    audioPlayer.play();
+  } catch (err) {
+    console.warn("No se pudo reproducir automáticamente:", err);
+  }
+}
+
 
 // Cambiar pista cuando se selecciona otra del <select>
 trackSelect.addEventListener('change', () => {
-  const selectedIndex = tracks.findIndex(t => t.file === trackSelect.value);
+  const selectedIndex = tracks.findIndex(t => t.archivo === trackSelect.value);
   if (selectedIndex !== -1) {
     currentTrackIndex = selectedIndex;
     loadTrack(currentTrackIndex);
   }
 });
+
 
 // Cambiar la velocidad de reproducción con el slider
 speedSlider.addEventListener('input', () => {
@@ -159,22 +177,6 @@ clearNotesBtn.addEventListener('click', () => {
   }
 });
 
-// Función para cargar una pista en el reproductor
-function loadTrack(index) {
-  audioPlayer.src = tracks[index].file;
-  // Mostrar mensaje personalizado o uno por defecto
-  messageElement.textContent = trackMessages[tracks[index].file] || '¡Buena práctica! Recuerda usar el diafragma :)';
-  trackSelect.value = tracks[index].file;
-  loadNotes();
-
-  // Intentar reproducir automáticamente
-  try {
-    audioPlayer.play();
-  } catch (err) {
-    console.warn("No se pudo reproducir automáticamente:", err);
-  }
-}
-
 // Elementos para grabación
 const startBtn = document.getElementById('startBtn');
 const stopBtn = document.getElementById('stopBtn');
@@ -264,45 +266,43 @@ if (isIOS()) {
         // *** ASEGURARSE DE QUE ESTE EVENTO SE DISPARE Y ACTUALICE EL MENSAJE ***
         // Esperar hasta que la duración esté disponible
 		function esperarDuracion(callback, intentos = 10) {
-		  const check = () => {
-			const duracion = playback.duration;
-			if (!isNaN(duracion) && isFinite(duracion)) {
-			  callback(duracion);
-			} else if (intentos > 0) {
-			  setTimeout(() => check(), 300);
-			  intentos--;
-			} else {
-			  callback(null); // Falló
-			}
-		  };
-		  check();
-		}
+  const check = (intentosRestantes) => {
+    const duracion = playback.duration;
+    if (!isNaN(duracion) && isFinite(duracion)) {
+      callback(duracion);
+    } else if (intentosRestantes > 0) {
+      setTimeout(() => check(intentosRestantes - 1), 300);
+    } else {
+      callback(null); // Falló
+    }
+  };
+  check(intentos);
+}
 
-		esperarDuracion((duracion) => {
-		  if (duracionTexto) {
-			if (duracion) {
-			  const minutos = Math.floor(duracion / 60);
-			  const segundos = Math.floor(duracion % 60).toString().padStart(2, '0');
-			  duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
-			} else {
-			  duracionTexto.textContent = 'Grabación lista!';
-			}
-			duracionTexto.style.display = 'block';
-		  }
-		});
+esperarDuracion((duracion) => {
+  if (duracionTexto) {
+    if (duracion) {
+      const minutos = Math.floor(duracion / 60);
+      const segundos = Math.floor(duracion % 60).toString().padStart(2, '0');
+      duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
+    } else {
+      duracionTexto.textContent = 'Grabación lista!';
+    }
+    duracionTexto.style.display = 'block';
+  }
+});
 
+// Si por alguna razón loadedmetadata no se dispara (ej. archivo muy corto),
+// asegúrate de que el mensaje de duración se oculte o reinicie.
+if (audioChunks.length === 0 && duracionTexto) {
+  duracionTexto.textContent = 'No se grabó audio.';
+  duracionTexto.style.display = 'block';
+}
 
-
-        // Si por alguna razón loadedmetadata no se dispara (ej. archivo muy corto),
-        // asegúrate de que el mensaje de duración se oculte o reinicie.
-        if (audioChunks.length === 0 && duracionTexto) {
-            duracionTexto.textContent = 'No se grabó audio.';
-            duracionTexto.style.display = 'block';
-        }
 
 
         // Preparar nombre para descargar la grabación
-        const trackName = tracks[currentTrackIndex]?.name || 'Ejercicio';
+        const trackName = tracks[currentTrackIndex]?.nombre || 'Ejercicio';
         const now = new Date();
         const safeName = trackName.replace(/[^a-zA-Z0-9 _-]/g, '').replace(/\s+/g, '_');
         const dateStr = now.toISOString().slice(0, 10);

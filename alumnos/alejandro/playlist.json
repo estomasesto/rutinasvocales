@@ -1,21 +1,17 @@
-{
-  "messages": {
-    "../../audios/Rally_Melismático_III_EEE_AAA_OOO_(C_-_C).mp3": "Recuerda que puedes ralentizar el audio! La idea es que cada nota se diferencie de la otra :)",
-    "../../audios/Slide_To_A_Fifth_-_Pete_Faint_(C_-_D).mp3": "Concéntrate en deslizar sin perder apoyo.",
-    "../../audios/Up_An_Octave,_And_Down_The_Scale_-_Adaptado_(Bb_-_Bb).mp3": "Trabaja el descenso con claridad vocal."
+[
+  {
+    "nombre": "Glissando a Quinta",
+    "archivo": "Slide_To_A_Fifth_-_Pete_Faint_(C_-_D).mp3",
+    "mensaje": "Concéntrate en deslizar sin perder apoyo."
   },
-  "tracks": [
-    {
-      "name": "Glissando a Quinta",
-      "file": "../../audios/Slide_To_A_Fifth_-_Pete_Faint_(C_-_D).mp3"
-    },
-    {
-      "name": "Octava y para Abajo",
-      "file": "../../audios/Up_An_Octave,_And_Down_The_Scale_-_Adaptado_(Bb_-_Bb).mp3"
-    },
-    {
-      "name": "Rally Melismático",
-      "file": "../../audios/Rally_Melismático_III_EEE_AAA_OOO_(C_-_C).mp3"
-    }
-  ]
-}
+  {
+    "nombre": "Octava y para Abajo",
+    "archivo": "Up_An_Octave,_And_Down_The_Scale_-_Adaptado_(Bb_-_Bb).mp3",
+    "mensaje": "Trabaja el descenso con claridad vocal."
+  },
+  {
+    "nombre": "Rally Melismático",
+    "archivo": "Rally_Melismático_III_EEE_AAA_OOO_(C_-_C).mp3",
+    "mensaje": "III-EEE-AAA-OOO. Recuerda que puedes ralentizar el audio! La idea es que cada nota se diferencie de la otra :)"
+  }
+]
