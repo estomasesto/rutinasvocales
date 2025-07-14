@@ -24,9 +24,9 @@ fetch('playlist.json')
     tracks = data; // ya es un array directamente
 
     // Llena el <select> con las opciones de pistas
-    tracks.forEach((track) => {
+    tracks.forEach((track, index) => {
       const option = document.createElement('option');
-      option.textContent = track.nombre;  // antes era track.name, ahora 'nombre'
+      option.textContent = `${index + 1}. ${track.nombre}`; // antes era track.name, ahora 'nombre'
       option.value = track.archivo;        // antes era track.file, ahora 'archivo'
       trackSelect.appendChild(option);
     });
