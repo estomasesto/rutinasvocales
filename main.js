@@ -282,7 +282,7 @@ if (isIOS()) {
 			  const segundos = Math.floor(duracion % 60).toString().padStart(2, '0');
 			  duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
 			} else {
-			  duracionTexto.textContent = 'No se pudo obtener la duración de la grabación.';
+			  duracionTexto.textContent = 'Grabación lista!';
 			}
 			duracionTexto.style.display = 'block';
 		  }
