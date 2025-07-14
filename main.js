@@ -43,7 +43,7 @@ function loadTrack(index) {
   if (index < 0 || index >= tracks.length) return;
 
   const track = tracks[index];
-  audioPlayer.src = `audios/${track.archivo}`;
+  audioPlayer.src = track.archivo;
   audioPlayer.load();
 
   messageElement.innerHTML = track.mensaje || '¡Buena práctica! Recuerda usar el diafragma :)';
