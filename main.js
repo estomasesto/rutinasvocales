@@ -241,6 +241,22 @@ if (isIOS()) {
         playback.src = audioUrl;
 
         playback.load();
+		
+		playback.onloadedmetadata = () => {
+		  playback.addEventListener('durationchange', () => {
+			const duracion = playback.duration;
+			if (!isNaN(duracion) && isFinite(duracion)) {
+			  const minutos = Math.floor(duracion / 60);
+			  const segundos = Math.floor(duracion % 60).toString().padStart(2, '0');
+
+			  if (duracionTexto) {
+				duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
+				duracionTexto.style.display = 'block';
+			  }
+			}
+		  }, { once: true });
+		};
+
 
         // *** ASEGURARSE DE QUE ESTE EVENTO SE DISPARE Y ACTUALICE EL MENSAJE ***
         // Esperar hasta que la duración esté disponible
