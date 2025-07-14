@@ -200,9 +200,20 @@ if (isIOS()) {
   startBtn.addEventListener('click', async () => {
     // *** Borrar cualquier mensaje de duración anterior al iniciar una nueva grabación ***
     if (duracionTexto) {
-      duracionTexto.textContent = '';
-      duracionTexto.style.display = 'none'; // Ocultar el recuadro también
-    }
+	  duracionTexto.textContent = '';
+	  duracionTexto.style.display = 'none';
+	}
+	if (playback) {
+	  playback.removeAttribute('src'); // Limpia fuente anterior
+	  playback.load(); // Reinicia el audio
+	}
+	const downloadBtn = document.getElementById('downloadBtn');
+	if (downloadBtn) {
+	  downloadBtn.style.display = 'none';
+	  downloadBtn.removeAttribute('href');
+	  downloadBtn.removeAttribute('download');
+	}
+
 
     recordingIndicator.style.display = 'flex'; // Mostrar indicador de grabando
     try { // Agregamos un try-catch para manejar permisos de micrófono
@@ -233,17 +244,30 @@ if (isIOS()) {
 
         // *** ASEGURARSE DE QUE ESTE EVENTO SE DISPARE Y ACTUALICE EL MENSAJE ***
         playback.onloadedmetadata = () => {
-          const duracion = playback.duration;
-          if (duracionTexto && !isNaN(duracion) && isFinite(duracion)) {
-            const minutos = Math.floor(duracion / 60);
-            const segundos = Math.floor(duracion % 60).toString().padStart(2, '0');
-            duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
-            duracionTexto.style.display = 'block'; // Mostrar el recuadro con el mensaje
-          } else if (duracionTexto) {
-            duracionTexto.textContent = 'No se pudo obtener la duración de la grabación.';
-            duracionTexto.style.display = 'block';
-          }
-        };
+		  mostrarDuracionGrabacion();
+		};
+
+		// Fallback en caso de que onloadedmetadata no se dispare
+		setTimeout(() => {
+		  if (isNaN(playback.duration) || !isFinite(playback.duration)) {
+			mostrarDuracionGrabacion(); // Forzamos intento de mostrar duración
+		  }
+		}, 1000);
+
+		// Función auxiliar para mostrar duración
+		function mostrarDuracionGrabacion() {
+		  const duracion = playback.duration;
+		  if (duracionTexto && !isNaN(duracion) && isFinite(duracion)) {
+			const minutos = Math.floor(duracion / 60);
+			const segundos = Math.floor(duracion % 60).toString().padStart(2, '0');
+			duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
+			duracionTexto.style.display = 'block';
+		  } else if (duracionTexto) {
+			duracionTexto.textContent = 'No se pudo obtener la duración de la grabación.';
+			duracionTexto.style.display = 'block';
+		  }
+		}
+
 
         // Si por alguna razón loadedmetadata no se dispara (ej. archivo muy corto),
         // asegúrate de que el mensaje de duración se oculte o reinicie.
