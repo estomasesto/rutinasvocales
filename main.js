@@ -243,30 +243,35 @@ if (isIOS()) {
         playback.load();
 
         // *** ASEGURARSE DE QUE ESTE EVENTO SE DISPARE Y ACTUALICE EL MENSAJE ***
-        playback.onloadedmetadata = () => {
-		  mostrarDuracionGrabacion();
-		};
-
-		// Fallback en caso de que onloadedmetadata no se dispare
-		setTimeout(() => {
-		  if (isNaN(playback.duration) || !isFinite(playback.duration)) {
-			mostrarDuracionGrabacion(); // Forzamos intento de mostrar duración
-		  }
-		}, 1000);
-
-		// Función auxiliar para mostrar duración
-		function mostrarDuracionGrabacion() {
-		  const duracion = playback.duration;
-		  if (duracionTexto && !isNaN(duracion) && isFinite(duracion)) {
-			const minutos = Math.floor(duracion / 60);
-			const segundos = Math.floor(duracion % 60).toString().padStart(2, '0');
-			duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
-			duracionTexto.style.display = 'block';
-		  } else if (duracionTexto) {
-			duracionTexto.textContent = 'No se pudo obtener la duración de la grabación.';
-			duracionTexto.style.display = 'block';
-		  }
+        // Esperar hasta que la duración esté disponible
+		function esperarDuracion(callback, intentos = 10) {
+		  const check = () => {
+			const duracion = playback.duration;
+			if (!isNaN(duracion) && isFinite(duracion)) {
+			  callback(duracion);
+			} else if (intentos > 0) {
+			  setTimeout(() => check(), 300);
+			  intentos--;
+			} else {
+			  callback(null); // Falló
+			}
+		  };
+		  check();
 		}
+
+		esperarDuracion((duracion) => {
+		  if (duracionTexto) {
+			if (duracion) {
+			  const minutos = Math.floor(duracion / 60);
+			  const segundos = Math.floor(duracion % 60).toString().padStart(2, '0');
+			  duracionTexto.textContent = `⏱️ Duración de la grabación: ${minutos}:${segundos}`;
+			} else {
+			  duracionTexto.textContent = 'No se pudo obtener la duración de la grabación.';
+			}
+			duracionTexto.style.display = 'block';
+		  }
+		});
+
 
 
         // Si por alguna razón loadedmetadata no se dispara (ej. archivo muy corto),
