@@ -14,6 +14,10 @@
       padding: 2rem;
     }
 
+    #contenido {
+      display: none; /* Oculta el contenido hasta que se desbloquee */
+    }
+
     h1 {
       text-align: center;
       margin-bottom: 2rem;
@@ -48,13 +52,26 @@
   </style>
 </head>
 <body>
-  <h1>Selecciona tu nombre</h1>
-  <ul>
-    <li><a href="/alumnos/alejandro1742/">Alejandro</a></li>
-    <li><a href="/alumnos/juan-carlos3797/">Juan Carlos</a></li>
-    <li><a href="/alumnos/raimundo5676/">Raimundo</a></li>
-	<li><a href="/alumnos/blacksiel3491/">Blacksiel</a></li>
-    <!-- Puedes seguir agregando más alumnos aquí -->
-  </ul>
+  <div id="contenido">
+    <h1>Selecciona tu nombre</h1>
+    <ul>
+      <li><a href="/alumnos/alejandro1742/">Alejandro</a></li>
+      <li><a href="/alumnos/juan-carlos3797/">Juan Carlos</a></li>
+      <li><a href="/alumnos/raimundo5676/">Raimundo</a></li>
+      <li><a href="/alumnos/blacksiel3491/">Blacksiel</a></li>
+      <!-- Puedes seguir agregando más alumnos aquí -->
+    </ul>
+  </div>
+
+  <script>
+    const password = prompt("Introduce la contraseña:");
+    const claveCorrecta = "rutina2024"; // Cambia esto por la contraseña que quieras
+
+    if (password === claveCorrecta) {
+      document.getElementById("contenido").style.display = "block";
+    } else {
+      document.body.innerHTML = "<h2 style='color: red; text-align: center;'>Acceso denegado</h2>";
+    }
+  </script>
 </body>
 </html>
