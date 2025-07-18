@@ -1,17 +1,37 @@
 [
   {
+    "nombre": "Desbloqueo Corporal",
+    "archivo": "../../audios/1.Desbloqueo_Corporal_v1.mp3",
+    "mensaje": "Recuerda que siempre hay que preparar el cuerpo antes de cantar, aunque sea un poco para activar la circulación."
+  },
+  {
+    "nombre": "Rally Respiratorio",
+    "archivo": "../../audios/2.Rally_Respiratorio_v1.mp3",
+    "mensaje": "Más te vale usar el apoyo aquí. Porque sino, te vas a desmayarrrrrr"
+  },
+  {
+    "nombre": "Inhalación y Exhalación con UUU subiendo y bajando brazos",
+    "archivo": "../../audios/3.Inh_Exh_Brazos_(20-36seg).mp3",
+    "mensaje": "Elige una nota cómoda, ni muy grave ni muy aguda. Mantén el apoyo (control de presión de aire)."
+  },
+  {
+    "nombre": "Lip Roll",
+    "archivo": "../../audios/4.Lip_Roll_(C-C).mp3",
+    "mensaje": "Recuerda apoyar! Si te cuesta hacer el Lip Roll, intenta levantando tus mejillas con tus manos a los lados de tu boca. Si aún no así te cuesta mucho, haz el ejercicio con RRR."
+  },
+  {
     "nombre": "Glissando a Quinta",
     "archivo": "../../audios/Slide_To_A_Fifth_-_Pete_Faint_(C_-_D).mp3",
-    "mensaje": "Concéntrate en deslizar sin perder apoyo."
+    "mensaje": "Concéntrate en deslizar de una nota a la otra sin perder el apoyo."
   },
   {
     "nombre": "Octava y para Abajo",
     "archivo": "../../audios/Up_An_Octave,_And_Down_The_Scale_-_Adaptado_(Bb_-_Bb).mp3",
-    "mensaje": "Trabaja el descenso con claridad vocal."
+    "mensaje": "Preocúpate de que el sonido sea lo más frontal posible, sin miedo a la nasalidad. Si no suena perfecto no importa, lo importante es que esté ejecutado correctamente a nivel técnico."
   },
   {
     "nombre": "Rally Melismático",
-    "archivo": "../../audios/Rally_Melismático_III_EEE_AAA_OOO_(C_-_C).mp3",
+    "archivo": "../../audios/Rally_Melismático_(C_-_C).mp3",
     "mensaje": "III-EEE-AAA-OOO. Cuando te sientas listo, súbele la velocidad. Pero ojo, la idea es que cada nota se diferencie de la otra, como escaleritas"
   }
 ]
