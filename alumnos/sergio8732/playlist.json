@@ -31,24 +31,24 @@
   },
   {
     "nombre": "Rally Melismático",
-    "archivo": "../../audios/Rally_Melismático_(C_-_C).mp3",
+    "archivo": "../../audios/Rally_Melismático_(C-C).mp3",
     "mensaje": "III-EEE-AAA-OOO. Cuando te sientas listo, súbele la velocidad. Pero ojo, la idea es que cada nota se diferencie de la otra, como escaleritas"
-  }
+  },
   {
     "nombre": "IIEEAAAA con Bajada",
     "archivo": "../../audios/IIEEAAAA_90_BPM_(C-C).mp3",
     "mensaje": "III-EEE-AAA. Recuerda que puedes subir la velocidad si quieres. La idea es que sientas en tus dientes de arriba las notas, en la zona del bigote!"
-  }
+  },
   {
     "nombre": "Salto a Falsete con Melodía",
     "archivo": "../../audios/Salto a Falsete con Melodía III (E-A).mp3",
     "mensaje": "Recuerda llegar directo a la nota!! Sin hacer una nota previa, sin glissandos previos y sin cambiar de volumen entre notas!"
-  }
+  },
   {
     "nombre": "Ejercicio Audioslave",
     "archivo": "../../audios/I_am_not_YOUR_(Audioslave)_(A-B).mp3",
     "mensaje": "No pierdas el apoyo! Y al igual que antes: recuerda llegar directo a la nota!! Sin hacer una nota previa, sin glissandos previos y sin cambiar de volumen entre notas!"
-  }
+  },
   {
     "nombre": "I Am The Highway",
     "archivo": "../../audios/karaokes/I_Am_the_Highway_(Instrumental).mp3",
