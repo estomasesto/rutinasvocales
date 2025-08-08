@@ -7,7 +7,7 @@
   {
     "nombre": "Rally Respiratorio",
     "archivo": "../../audios/2.Rally_Respiratorio_v1.mp3",
-    "mensaje": "Más te vale usar el apoyo aquí. Porque sino, te vas a desmayarrrrrr"
+    "mensaje": "Más te vale usar el apoyo aquí Alejandro! Porque de no hacerlo, te desmayarás 😲. [Inhalo = relajo, Exhalo = ACTIVO !!]"
   },
   {
     "nombre": "Inhalación y Exhalación con UUU subiendo y bajando brazos",
@@ -21,12 +21,12 @@
   },
   {
     "nombre": "Glissando a Quinta",
-    "archivo": "../../audios/Slide_To_A_Fifth_-_Pete_Faint_(C_-_D).mp3",
-    "mensaje": "Concéntrate en deslizar de una nota a la otra sin perder el apoyo. Intenta hacer todo en voz mixta. Si te cuesta mucho, pasa a falsete cuando lo consideres necesario."
+    "archivo": "../../audios/Slide_To_A_Fifth_-_Pete_Faint_(C-D).mp3",
+    "mensaje": "Concéntrate en deslizar de una nota a la otra sin perder el apoyo. Pasa a voz de cabeza cuando lo consideres necesario."
   },
   {
     "nombre": "Octava y para Abajo",
-    "archivo": "../../audios/Up_An_Octave,_And_Down_The_Scale_-_Adaptado_(Bb_-_Bb).mp3",
+    "archivo": "../../audios/Up_An_Octave,_And_Down_The_Scale_-_Adaptado_(Bb-Bb).mp3",
     "mensaje": "Preocúpate de que el sonido sea lo más frontal posible, sin miedo a la nasalidad. Si no suena perfecto no importa, lo importante es que esté ejecutado correctamente a nivel técnico."
   },
   {
@@ -34,4 +34,24 @@
     "archivo": "../../audios/Rally_Melismático_(C_-_C).mp3",
     "mensaje": "III-EEE-AAA-OOO. Cuando te sientas listo, súbele la velocidad. Pero ojo, la idea es que cada nota se diferencie de la otra, como escaleritas"
   }
+  {
+    "nombre": "IIEEAAAA con Bajada",
+    "archivo": "../../audios/IIEEAAAA_90_BPM_(C-C).mp3",
+    "mensaje": "III-EEE-AAA. Recuerda que puedes subir la velocidad si quieres. La idea es que sientas en tus dientes de arriba las notas, en la zona del bigote!"
+  }
+  {
+    "nombre": "Salto a Falsete con Melodía",
+    "archivo": "../../audios/Salto a Falsete con Melodía III (E-A).mp3",
+    "mensaje": "Recuerda llegar directo a la nota!! Sin hacer una nota previa, sin glissandos previos y sin cambiar de volumen entre notas!"
+  }
+  {
+    "nombre": "Impossible Year",
+    "archivo": "../../audios/karaokes/Panic_At_The_Disco_-_Impossible_Year_(Instrumental).mp3",
+    "mensaje": "Dalo todo y recuerda no subir el volumen! 🤘"
+  }
+  {
+    "nombre": "The Ballad Of Mona Lisa",
+    "archivo": "../../audios/karaokes/Panic_At_The_Disco_-_The_Ballad_of_Mona_Lisa_-_Gm_(Instrumental).mp3",
+    "mensaje": "DALO TODOOOOOOOOOOOOOOO 🤘"
+  }  
 ]
