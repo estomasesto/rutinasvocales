@@ -1,0 +1,47 @@
+[
+  {
+    "nombre": "Desbloqueo Corporal",
+    "archivo": "../../audios/1.Desbloqueo_Corporal_v1.mp3",
+    "mensaje": "Recuerda que siempre hay que preparar el cuerpo antes de cantar, aunque sea un poco para activar la circulación."
+  },
+  {
+    "nombre": "Rally Respiratorio",
+    "archivo": "../../audios/2.Rally_Respiratorio_v1.mp3",
+    "mensaje": "Más te vale usar el apoyo aquí! Porque de no hacerlo, te desmayarás jashdja 😲. [Inhalo = relajo, Exhalo = ACTIVO !!]"
+  },
+  {
+    "nombre": "Inhalación y Exhalación con UUU subiendo y bajando brazos",
+    "archivo": "../../audios/3.Inh_Exh_Brazos_(20-36seg).mp3",
+    "mensaje": "Elige una nota cómoda, ni muy grave ni muy aguda. Mantén el apoyo (control de presión de aire)."
+  },
+  {
+    "nombre": "Lip Roll",
+    "archivo": "../../audios/4.Lip_Roll_(Ab-Ab)(MEZZO).mp3",
+    "mensaje": "Recuerda apoyar! Si te cuesta hacer el Lip Roll, intenta levantando tus mejillas con tus manos a los lados de tu boca. Si aún así te cuesta mucho, haz el ejercicio con RRR."
+  },
+  {
+    "nombre": "Glissando a Quinta",
+    "archivo": "../../audios/Glissando_a_5ta_(Ab-Bb)(MEZZO).mp3",
+    "mensaje": "Concéntrate en deslizar de una nota a la otra sin perder el apoyo. Pasa a voz de cabeza cuando lo consideres necesario."
+  },
+  {
+    "nombre": "Rally Melismático",
+    "archivo": "../../audios/Rally_Melismático_(Ab-Ab)(MEZZO).mp3",
+    "mensaje": "III-EEE-AAA-OOO. Cuando te sientas listo, súbele la velocidad. Pero ojo, la idea es que cada nota se diferencie de la otra, como escaleritas"
+  },
+  {
+    "nombre": "IIEEAAAA con Bajada",
+    "archivo": "../../audios/IIEEAAAA_90_BPM_(Ab-Ab)(MEZZO).mp3",
+    "mensaje": "III-EEE-AAA. Recuerda que puedes subir la velocidad si quieres. La idea es que sientas en tus dientes de arriba las notas, en la zona del bigote!"
+  },
+  {
+    "nombre": "Vivir Mi Vida",
+    "archivo": "../../audios/karaokes/Marc_Anthony_-_Vivir_Mi_Vida_(Audio)-F-105bpm-441hz.mp3",
+    "mensaje": "Canta con energía y confianza! <a href='https://www.letras.com/marc-anthony/vivir-mi-vida/' target='_blank'>Ver letra</a>"
+  },
+  {
+    "nombre": "Solitude",
+    "archivo": "../../audios/karaokes/Djavan-Solitude_(+6)(Db)_(Karaoke).mp3",
+    "mensaje": "A cantar en portugués 🇧🇷 ! <a href='https://www.letras.com/djavan/solitude/' target='_blank'>Ver letra</a>"
+  }
+]
