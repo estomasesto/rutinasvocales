@@ -1,0 +1,67 @@
+[
+  {
+    "nombre": "Desbloqueo Corporal",
+    "archivo": "../../audios/1.Desbloqueo_Corporal_v1.mp3",
+    "mensaje": "Recuerda que siempre hay que preparar el cuerpo antes de cantar, aunque sea un poco para activar la circulación."
+  },
+  {
+    "nombre": "Rally Respiratorio",
+    "archivo": "../../audios/2.Rally_Respiratorio_v1.mp3",
+    "mensaje": "Más te vale usar el apoyo aquí Alejandro! Porque de no hacerlo, te desmayarás 😲. [Inhalo = relajo, Exhalo = ACTIVO !!]"
+  },
+  {
+    "nombre": "Inhalación y Exhalación con UUU subiendo y bajando brazos",
+    "archivo": "../../audios/3.Inh_Exh_Brazos_(20-36seg).mp3",
+    "mensaje": "Elige una nota cómoda, ni muy grave ni muy aguda. Mantén el apoyo (control de presión de aire)."
+  },
+  {
+    "nombre": "Lip Roll",
+    "archivo": "../../audios/4.Lip_Roll_(C-C).mp3",
+    "mensaje": "Recuerda apoyar! Si te cuesta hacer el Lip Roll, intenta levantando tus mejillas con tus manos a los lados de tu boca. Si aún así te cuesta mucho, haz el ejercicio con RRR."
+  },
+  {
+    "nombre": "Glissando a Quinta",
+    "archivo": "../../audios/Slide_To_A_Fifth_-_Pete_Faint_(C-D).mp3",
+    "mensaje": "Concéntrate en deslizar de una nota a la otra sin perder el apoyo. Pasa a voz de cabeza cuando lo consideres necesario."
+  },
+  {
+    "nombre": "Octava y para Abajo",
+    "archivo": "../../audios/Up_An_Octave,_And_Down_The_Scale_-_Adaptado_(Bb-Bb).mp3",
+    "mensaje": "Preocúpate de que el sonido sea lo más frontal posible, sin miedo a la nasalidad. Si no suena perfecto no importa, lo importante es que esté ejecutado correctamente a nivel técnico."
+  },
+  {
+    "nombre": "Rally Melismático",
+    "archivo": "../../audios/Rally_Melismático_(C-C).mp3",
+    "mensaje": "III-EEE-AAA-OOO. Cuando te sientas listo, súbele la velocidad. Pero ojo, la idea es que cada nota se diferencie de la otra, como escaleritas"
+  },
+  {
+    "nombre": "IIEEAAAA con Bajada",
+    "archivo": "../../audios/IIEEAAAA_90_BPM_(C-C).mp3",
+    "mensaje": "III-EEE-AAA. Recuerda que puedes subir la velocidad si quieres. La idea es que sientas en tus dientes de arriba las notas, en la zona del bigote!"
+  },
+  {
+    "nombre": "Salto a Falsete con Melodía",
+    "archivo": "../../audios/Salto_a_Falsete_con_Melodía_III_(E-A).mp3",
+    "mensaje": "Recuerda llegar directo a la nota!! Sin hacer una nota previa, sin glissandos previos y sin cambiar de volumen entre notas!"
+  },
+  {
+    "nombre": "Ejercicio Audioslave",
+    "archivo": "../../audios/I_am_not_YOUR_(Audioslave)_(A-B).mp3",
+    "mensaje": "No pierdas el apoyo! Y al igual que antes: recuerda llegar directo a la nota!! Sin hacer una nota previa, sin glissandos previos y sin cambiar de volumen entre notas!"
+  },
+  {
+    "nombre": "I Am The Highway",
+    "archivo": "../../audios/karaokes/I_Am_the_Highway_(Instrumental).mp3",
+    "mensaje": "Dalo todo y recuerda no subir el volumen! 🤘"
+  },
+  {
+    "nombre": "Impossible Year",
+    "archivo": "../../audios/karaokes/Panic_At_The_Disco_-_Impossible_Year_(Instrumental).mp3",
+    "mensaje": "Dalo todo y recuerda no subir el volumen! 🤘"
+  },
+  {
+    "nombre": "The Ballad Of Mona Lisa",
+    "archivo": "../../audios/karaokes/Panic_At_The_Disco_-_The_Ballad_of_Mona_Lisa_-_Gm_(Instrumental).mp3",
+    "mensaje": "DALO TODOOOOOOOOOOOOOOO 🤘"
+  }  
+]
