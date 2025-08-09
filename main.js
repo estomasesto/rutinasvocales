@@ -38,6 +38,7 @@ fetch('playlist.json')
     }
   });
   
+
 // Función para cargar una pista según índice
 function loadTrack(index) {
   if (index < 0 || index >= tracks.length) return;
