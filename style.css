@@ -142,3 +142,11 @@ details {
   padding: 1rem;       /* padding interno */
   box-sizing: border-box;
 }
+
+a {
+  color: #1db954; /* Verde Spotify */
+}
+
+a:hover {
+  color: #1aa34a; /* Un tono más claro al pasar el mouse */
+}
