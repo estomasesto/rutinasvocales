@@ -53,5 +53,10 @@
     "nombre": "Cambia Todo Cambia",
     "archivo": "../../audios/karaokes/Cambia_Todo_Cambia_(Karaoke).mp3",
     "mensaje": "Vamos Alejandro! A aplicar todo lo aprendido!! <a href='https://www.letras.com/mercedes-sosa/37545/' target='_blank'>Ver letra</a>"
-  }  
+  },
+  {
+    "nombre": "Always On My Mind",
+    "archivo": "../../audios/karaokes/Michael_Bublé_-_Always_on_My_Mind-C-66bpm-441hz.mp3",
+    "mensaje": "Ésta canción es para interpretarla con sentimiento y dulzura, intenta evocar esas sensaciones en tu voz! <a href='https://www.letras.com/michael-buble/994313/' target='_blank'>Ver letra</a>"
+  }
 ]
