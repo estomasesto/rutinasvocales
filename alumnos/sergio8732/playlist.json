@@ -45,9 +45,14 @@
     "mensaje": "Recuerda llegar directo a la nota!! Sin hacer una nota previa, sin glissandos previos y sin cambiar de volumen entre notas!"
   },
   {
-    "nombre": "Ejercicio Audioslave",
-    "archivo": "../../audios/I_am_not_YOUR_(Audioslave)_(A-B).mp3",
-    "mensaje": "No pierdas el apoyo! Y al igual que antes: recuerda llegar directo a la nota!! Sin hacer una nota previa, sin glissandos previos y sin cambiar de volumen entre notas!"
+    "nombre": "Sirenas 1 y 2 Octavas",
+    "archivo": "../../audios/Sirenas_1_y_2_octavas_(Tenor).mp3",
+    "mensaje": "Mantén el volumen constante! Y también recuerda que la octava del medio es con voz de pecho en ida y en vuelta, así que a trabajar esa vuelta ágil a pecho desde falsete!"
+  },
+  {
+    "nombre": "Wanda!",
+    "archivo": "../../audios/Wanda_5ta_y_6ta_(C-Bb).mp3",
+    "mensaje": "La idea es que lo hagas completo con voz de pecho, sin quebrar a falsete!! Tú puedes 🔥"
   },
   {
     "nombre": "I Am The Highway",
@@ -58,5 +63,10 @@
     "nombre": "Like a Stone",
     "archivo": "../../audios/karaokes/Audioslave_-_Like_a_stone-Gm-108bpm-440hz.mp3",
     "mensaje": "Recuerda controlar el volumen y priorizar la técnica por sobre el resultado sonoro!! <a href='https://www.letras.com/audioslave/69438/' target='_blank'>Ver letra</a>"
+  },
+  {
+    "nombre": "Drive",
+    "archivo": "../../audios/karaokes/Drive_-_Incubus_E_minor-91bpm-442hz.mp3",
+    "mensaje": "Interpreta, haz tuya la canción!! <a href='https://www.letras.com/incubus/18994/' target='_blank'>Ver letra</a>"
   }
 ]
