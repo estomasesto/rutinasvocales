@@ -44,6 +44,11 @@
     "archivo": "../../audios/Salto_a_Falsete_con_Melodía_III_(E-A).mp3",
     "mensaje": "Recuerda llegar directo a la nota!! Sin hacer una nota previa, sin glissandos previos y sin cambiar de volumen entre notas!"
   },
+    {
+    "nombre": "Miii eee aaah con Melisma",
+    "archivo": "../../audios/Miii_eee_aaah_con_melisma.mp3",
+    "mensaje": "Ojo con hacer la nota ancla! Si sientes que es muy rápido puede usar el slider de velocidad para reducirla. Ah y recuerda hacer el vibrato al final!!!"
+  },
   {
     "nombre": "Sirenas 1 y 2 Octavas",
     "archivo": "../../audios/Sirenas_1_y_2_octavas_(Tenor).mp3",
