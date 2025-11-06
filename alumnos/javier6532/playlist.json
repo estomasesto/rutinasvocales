@@ -30,6 +30,16 @@
     "mensaje": "Recuerda llegar directo a la nota!! Sin hacer una nota previa, sin glissandos previos y sin cambiar de volumen entre notas!"
   },
   {
+    "nombre": "Miii eee aaah con Melisma",
+    "archivo": "../../audios/Miii_eee_aaah_con_melisma.mp3",
+    "mensaje": "Ojo con hacer la nota ancla! Si sientes que es muy rápido puede usar el slider de velocidad para reducirla. Ah y recuerda hacer el vibrato al final!!!"
+  },
+  {
+    "nombre": "Escalera Melismática",
+    "archivo": "../../audios/Escalera_Melismática_Mayor_C-A_(100bpm).mp3",
+    "mensaje": "Que se entiendan todas las notas!!!"
+  },
+  {
     "nombre": "Crimen",
     "archivo": "../../audios/karaokes/Gustavo_Cerati_-_Crimen-E-81bpm-441hz.mp3",
     "mensaje": "DALO TODOOOOOO! <a href='https://www.letras.com/gustavo-cerati/535873/' target='_blank'>Ver letra</a>"
