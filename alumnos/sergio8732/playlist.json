@@ -30,9 +30,14 @@
     "mensaje": "Preocúpate de que el sonido sea lo más frontal posible, sin miedo a la nasalidad. Si no suena perfecto no importa, lo importante es que esté ejecutado correctamente a nivel técnico."
   },
   {
-    "nombre": "Rally Melismático",
-    "archivo": "../../audios/Rally_Melismático_(C-C).mp3",
-    "mensaje": "III-EEE-AAA-OOO. Cuando te sientas listo, súbele la velocidad. Pero ojo, la idea es que cada nota se diferencie de la otra, como escaleritas"
+    "nombre": "Unísono Cabeza - Pecho",
+    "archivo": "../../audios/Unísono_Cabeza_Pecho_(D-G).mp3",
+    "mensaje": "Lo ideal es que suene el cambio, pero sino, intenta 'sentir' el cambio. Osea que sepas que estás o en cabeza o en pecho."
+  },
+  {
+    "nombre": "Boomerang 3a menor Pecho - Cabeza",
+    "archivo": "../../audios/Boomerang_3a menor_pecho_cabeza_B(D)_-_F#(A).mp3",
+    "mensaje": "Lo ideal es que suene el cambio, pero sino, intenta 'sentir' el cambio. Osea que sepas que estás o en cabeza o en pecho."
   },
   {
     "nombre": "IIEEAAAA con Bajada",
@@ -44,10 +49,15 @@
     "archivo": "../../audios/Salto_a_Falsete_con_Melodía_III_(E-A).mp3",
     "mensaje": "Recuerda llegar directo a la nota!! Sin hacer una nota previa, sin glissandos previos y sin cambiar de volumen entre notas!"
   },
-    {
+  {
     "nombre": "Miii eee aaah con Melisma",
     "archivo": "../../audios/Miii_eee_aaah_con_melisma.mp3",
     "mensaje": "Ojo con hacer la nota ancla! Si sientes que es muy rápido puede usar el slider de velocidad para reducirla. Ah y recuerda hacer el vibrato al final!!!"
+  },
+  {
+    "nombre": "Escalera Melismática",
+    "archivo": "../../audios/Escalera_Melismática_Mayor_C-A_(100bpm).mp3",
+    "mensaje": "Que se entiendan todas las notas!!!"
   },
   {
     "nombre": "Sirenas 1 y 2 Octavas",
