@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rutinas Vocales - Lupe</title>
+  <link rel="stylesheet" href="../../style.css" />
+  <style>
+    details {
+      background: #2c2c2c;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-top: 1rem;
+    }
+    summary {
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+    summary::-webkit-details-marker {
+      display: none;
+    }
+    summary::before {
+      content: "▶️ ";
+      display: inline-block;
+      margin-right: 0.5rem;
+      transform: rotate(0deg);
+      transition: transform 0.2s ease;
+    }
+    details[open] summary::before {
+      content: "🔽 ";
+    }
+  </style>
+</head>
+<body>
+  <div class="player-container">
+    <h1>Rutina Vocal de Lupe</h1>
+    <p id="customMessage" style="margin-bottom: 1rem; font-size: 1.1rem;"></p>
+    
+    <select id="trackSelect"></select>
+    <audio id="audioPlayer" controls controlsList="nodownload"></audio>
+    
+    <div class="skip-controls">
+      <button id="rewindBtn">⏪ -5s</button>
+      <button id="forwardBtn">+5s ⏩</button>
+    </div>
+
+    <div class="controls">
+      <label for="speedSlider">Velocidad:</label>
+      <input type="range" id="speedSlider" min="0.5" max="2" step="0.1" value="1" />
+      <span id="speedLabel">1.0x</span>
+      <button id="resetSpeedBtn" title="Volver a velocidad normal">Resetear velocidad</button>
+    </div>
+
+    <!-- Sección de grabación en un menú desplegable -->
+    <details id="recordingSection">
+      <summary>🎤 Graba tu práctica</summary>
+      <div id="recorder" style="margin-top: 1rem;">
+	  
+	    <!-- Mensaje solo visible en iOS -->
+        <p id="ios-warning" style="color: #d88; font-size: 0.9rem; display: none;">
+          ⚠️ La grabación no está disponible en iOS. Si quieres grabarte, te recomendamos usar un computador o dispositivo Android.
+        </p>
+		
+        <button id="startBtn">🎙️ Grabar</button>
+        <button id="stopBtn" disabled>⏹️ Detener</button>
+		
+		<div id="recordingIndicator">
+		  <div id="recordingDot"></div>
+		  <span>Grabando…</span>
+		</div>
+
+
+        <a id="downloadBtn" style="display:none;">⬇️ Descargar grabación</a>
+		<audio id="playback" controls></audio>
+
+		<!-- Mensaje de estado de la grabación -->
+		<div id="duracion" style="display: none; margin-top: 1rem; color: #333; background: #e0ffe0; padding: 0.6rem; border-radius: 5px;"></div>
+
+
+
+      </div>
+    </details>
+
+    <!-- Sección de notas en otro menú desplegable -->
+    <details>
+      <summary>📝 Notas del ejercicio</summary>
+      <div id="notesSection" style="background: #333; padding: 1rem; border-radius: 1rem; margin-top: 1rem;">
+        <h3>📝 Notas del ejercicio</h3>
+        <textarea id="noteInput" rows="4" placeholder="Escribe tus observaciones aquí..." style="width: 100%; box-sizing: border-box; resize: vertical; max-height: 200px;"></textarea>
+        <br>
+        <button id="saveNoteBtn">💾 Guardar nota</button>
+        <button id="clearNotesBtn">🗑️ Borrar todas</button>
+        <ul id="notesList" style="list-style: none; padding-left: 0;"></ul>
+      </div>
+    </details>
+
+  </div>
+
+  <script src="../../main.js"></script>
+</body>
+</html>

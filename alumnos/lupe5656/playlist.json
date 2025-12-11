@@ -1,0 +1,22 @@
+[
+  {
+    "nombre": "Respiración con Sss",
+    "archivo": "../../audios/Lupe/Inh_Exh_con_Sss-8_a_14_seg.mp3",
+    "mensaje": "Recuerda mantener un volumen bajo! Y sonreír un poco la Sss"
+  },
+  {
+    "nombre": "Respiratorio con Uuu en Fa4",
+    "archivo": "../../audios/Lupe/Inh_Exh_con_Uuu_Fa4-6_a_10_seg.mp3",
+    "mensaje": "También recuerda mantener el volumen bajo! Y no tensarte, busca un sonido grande como bostezo o imitando a un búho 🦉"
+  },
+  {
+    "nombre": "Inhalación y Exhalación con UUU subiendo y bajando brazos",
+    "archivo": "../../audios/Lupe/Inh_Exh_con_Uuu_Do4-6_a_10_seg.mp3",
+    "mensaje": "Esta es una nota de pecho! También busca un sonido grande como bostezo o imitando a un búho 🦉"
+  },
+  {
+    "nombre": "Solitude",
+    "archivo": "../../audios/karaokes/Djavan-Solitude_(+6)(Db)_(Karaoke).mp3",
+    "mensaje": "A cantar en portugués 🇧🇷 ! <a href='https://www.letras.com/djavan/solitude/' target='_blank'>Ver letra</a>"
+  }
+]
