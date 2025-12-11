@@ -6,12 +6,12 @@
   },
   {
     "nombre": "Respiratorio con Uuu en Fa4",
-    "archivo": "../../audios/Lupe/Inh_Exh_con_Uuu_Fa4-6_a_10_seg.mp3",
+    "archivo": "../../audios/Lupe/Uuu_Fa4-6a10seg.mp3",
     "mensaje": "También recuerda mantener el volumen bajo! Y no tensarte, busca un sonido grande como bostezo o imitando a un búho 🦉"
   },
   {
     "nombre": "Respiratorio con Uuu en Do4",
-    "archivo": "../../audios/Lupe/Inh_Exh_con_Uuu_Do4-6_a_10_seg.mp3",
+    "archivo": "../../audios/Lupe/Uuu_Do4-6a10seg.mp3",
     "mensaje": "Esta es una nota de pecho! También busca un sonido grande como bostezo o imitando a un búho 🦉"
   }
 ]
