@@ -13,5 +13,20 @@
     "nombre": "Respiratorio con Uuu en Do4",
     "archivo": "../../audios/Lupe/Uuu_Do4-6a10seg.mp3",
     "mensaje": "Esta es una nota de pecho! También busca un sonido grande como bostezo o imitando a un búho 🦉"
-  }
+  },
+  {
+    "nombre": "Ooo con voz llenita",
+    "archivo": "../../audios/Lupe/Lupe_Ooo_G3-Ab4.mp3",
+    "mensaje": "Vamos con una Ooo lo más natural y fácil posible. Busca la apertura vocal todo el tiempo, y recuerda subir el paladar!! Si ya sientes que te queda muy aguda la nota, prueba con una Uuu."
+  },
+  {
+    "nombre": "Héroe con Voz",
+    "archivo": "../../audios/karaokes/Francisca_Valenzuela_-_Héroe_(Original).mp3",
+    "mensaje": "A cantar!!!"
+  },
+  {
+    "nombre": "Héroe KARAOKE!!!",
+    "archivo": "../../audios/karaokes/Francisca_Valenzuela_-_Héroe_(Karaoke_tono_original).mp3",
+    "mensaje": "Dalo todo con el karaoke!! 🎤🎤🎤 <a href='https://www.letras.com/francisca-valenzuela/heroe/' target='_blank'>Ver letra</a>"
+  },
 ]
