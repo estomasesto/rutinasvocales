@@ -1,22 +1,22 @@
 [
   {
     "nombre": "Respiratorio con Sss",
-    "archivo": "../../audios/Lupe/Inh_Exh_con_Sss-8_a_14_seg.mp3",
+    "archivo": "../../audios/Lupe/Inh_Exh_con_Sss-8_a_16_seg.mp3",
     "mensaje": "Recuerda mantener un volumen bajo! Y sonreír un poco la Sss"
   },
   {
     "nombre": "Respiratorio con Uuu en Fa4",
-    "archivo": "../../audios/Lupe/Uuu_Fa4-6a10seg.mp3",
+    "archivo": "../../audios/Lupe/Inh_Exh_con_Uuu_Fa4-6_a_12_seg.mp3",
     "mensaje": "También recuerda mantener el volumen bajo! Y no tensarte, busca un sonido grande como bostezo o imitando a un búho 🦉"
   },
   {
     "nombre": "Respiratorio con Uuu en Do4",
-    "archivo": "../../audios/Lupe/Uuu_Do4-6a10seg.mp3",
+    "archivo": "../../audios/Lupe/Inh_Exh_con_Uuu_Do4-6_a_12_seg.mp3",
     "mensaje": "Esta es una nota de pecho! También busca un sonido grande como bostezo o imitando a un búho 🦉"
   },
   {
     "nombre": "Ooo con voz llenita",
-    "archivo": "../../audios/Lupe/Lupe_Ooo_G3-Ab4.mp3",
+    "archivo": "../../audios/Lupe/Lupe_Ooo_G3-Db5.mp3",
     "mensaje": "Vamos con una Ooo lo más natural y fácil posible. Busca la apertura vocal todo el tiempo, y recuerda subir el paladar!! Si ya sientes que te queda muy aguda la nota, prueba con una Uuu."
   },
   {
@@ -28,5 +28,15 @@
     "nombre": "Héroe KARAOKE!!!",
     "archivo": "../../audios/karaokes/Francisca_Valenzuela_-_Héroe_(Karaoke_tono_original).mp3",
     "mensaje": "Dalo todo con el karaoke!! 🎤🎤🎤 <a href='https://www.letras.com/francisca-valenzuela/heroe/' target='_blank'>Ver letra</a>"
+  },
+  {
+    "nombre": "Se Me Fue con Voz!!!",
+    "archivo": "../../audios/karaokes/Se_Me_Fue-Bbm-CON-VOZ-62bpm-443hz.mp3",
+    "mensaje": "Recuerda cantar lo más posible con tu voz de pecho!! 🎤🎤🎤 <a href='https://www.letras.com/myriam-hernandez/997344/' target='_blank'>Ver letra</a>"
+  },
+  {
+    "nombre": "Se Me Fue KARAOKE!!!",
+    "archivo": "../../audios/karaokes/Se_Me_Fue-Bbm-KARAOKE-62bpm-443hz.mp3",
+    "mensaje": "Dalo todo con el karaoke!! 🎤🎤🎤 <a href='https://www.letras.com/myriam-hernandez/997344/' target='_blank'>Ver letra</a>"
   }
 ]
