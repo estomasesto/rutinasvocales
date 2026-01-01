@@ -38,5 +38,10 @@
     "nombre": "Se Me Fue KARAOKE!!!",
     "archivo": "../../audios/karaokes/Se_Me_Fue-Bbm-KARAOKE-62bpm-443hz.mp3",
     "mensaje": "Dalo todo con el karaoke!! 🎤🎤🎤 <a href='https://www.letras.com/myriam-hernandez/997344/' target='_blank'>Ver letra</a>"
+  },
+  {
+    "nombre": "Se Me Fue A CAPELLA",
+    "archivo": "../../audios/karaokes/Se_Me_Fue-ACAPELLA.mp3",
+    "mensaje": "Simplemente hermoso 🌟🌟"
   }
 ]
